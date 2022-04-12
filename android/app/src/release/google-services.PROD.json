@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1003798341490",
+    "firebase_url": "https://tem-app-667d2.firebaseio.com",
+    "project_id": "tem-app-667d2",
+    "storage_bucket": "tem-app-667d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1003798341490:android:4e8f93cf39cd87f983dfeb",
+        "android_client_info": {
+          "package_name": "com.capovela.tem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1003798341490-nv9jc2nd8pnn3q00rtdftp3o86ffntbf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.capovela.tem",
+            "certificate_hash": "1e62176d46f981a3482d3ccc534471fed62fcf84"
+          }
+        },
+        {
+          "client_id": "1003798341490-4i9covj8piurtbbllq9e9a2svgm6v8uk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAK_Gi3ZAQXYADtPmsS0P6r_9wzfJsJnuA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1003798341490-4i9covj8piurtbbllq9e9a2svgm6v8uk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1003798341490-s49ee0p8atqlrgha0iqtt3jufkj61j2q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tem.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,182 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Fix Rules - eslint",
+      "type": "shell",
+      "command": "npm run lint:fix",
+      "problemMatcher": [
+        "$tsc",
+        "$eslint-stylish"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Release APK",
+      "group": "build",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/android"
+      },
+      "command": "./gradlew assembleRelease",
+      "problemMatcher": []
+    },
+    {
+      "label": "Bundle",
+      "detail": "to publish to the Play Store",
+      "group": "build",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/android"
+      },
+      "command": "./gradlew bundleRelease",
+      "problemMatcher": []
+    },
+    {
+      "type": "npm",
+      "script": "lint",
+      "problemMatcher": [
+        "$eslint-stylish"
+      ],
+      "label": "npm: lint",
+      "detail": "eslint --ext .js,.jsx,.ts,.tsx ."
+    },
+    {
+      "label": "npm: reverse-api",
+      "type": "npm",
+      "script": "reverse-api",
+      "problemMatcher": [],
+      "detail": "Reverse localhost:4000 from device to PC",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "Clean Android Build",
+      "type": "npm",
+      "script": "android:clean",
+      "problemMatcher": []
+    },
+    {
+      "type": "npm",
+      "script": "inspect",
+      "problemMatcher": [],
+      "label": "npm: inspect",
+      "detail": "npm run devtools && npm run toggle-inspector"
+    },
+    {
+      "type": "npm",
+      "script": "toggle-inspector",
+      "problemMatcher": [],
+      "label": "npm: toggle-inspector",
+      "detail": "adb shell input keyevent KEYCODE_MENU KEYCODE_DPAD_DOWN KEYCODE_DPAD_DOWN KEYCODE_DPAD_DOWN KEYCODE_DPAD_DOWN KEYCODE_DPAD_DOWN KEYCODE_ENTER && adb shell input tap 300 150",
+      "isBackground": true
+    },
+    {
+      "type": "npm",
+      "script": "apk+install",
+      "problemMatcher": [],
+      "label": "npm: apk+install",
+      "detail": "npm run apk && npm run app:uninstall && npm run app:install"
+    },
+    {
+      "type": "npm",
+      "script": "app:install",
+      "problemMatcher": [],
+      "label": "npm: app:install",
+      "detail": "adb install -r android/app/build/outputs/apk/release/app-release.apk"
+    },
+    {
+      "type": "npm",
+      "script": "app:uninstall",
+      "problemMatcher": [],
+      "label": "npm: app:uninstall",
+      "detail": "adb uninstall com.capovela.tem"
+    },
+    {
+      "type": "npm",
+      "script": "apk",
+      "problemMatcher": [],
+      "label": "npm: apk",
+      "detail": "run-script-os"
+    },
+    {
+      "type": "npm",
+      "script": "android",
+      "problemMatcher": [],
+      "label": "npm: android",
+      "detail": "react-native run-android"
+    },
+    {
+      "type": "npm",
+      "script": "start",
+      "problemMatcher": [],
+      "label": "npm: start",
+      "detail": "adb reverse tcp:8081 tcp:8081 && react-native start"
+    },
+    {
+      "type": "npm",
+      "script": "run:wait-for-native-debugger",
+      "problemMatcher": [],
+      "label": "npm: run:wait-for-native-debugger",
+      "detail": "adb shell am start -D -n com.capovela.tem/com.capovela.tem.MainActivity",
+      "isBackground": true
+    },
+    {
+      "type": "npm",
+      "script": "start:prepare",
+      "problemMatcher": [],
+      "label": "npm: start:prepare",
+      "detail": "adb reverse tcp:8081 tcp:8081",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "type": "npm",
+      "script": "show-debug-menu",
+      "problemMatcher": [],
+      "label": "npm: show-debug-menu",
+      "detail": "adb shell input keyevent KEYCODE_MENU",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "type": "npm",
+      "script": "toggle-debug",
+      "problemMatcher": [],
+      "label": "npm: toggle-debug",
+      "detail": "adb shell input keyevent KEYCODE_MENU KEYCODE_DPAD_DOWN KEYCODE_DPAD_DOWN KEYCODE_ENTER && adb shell input tap 300 150",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    }
+  ]
+}

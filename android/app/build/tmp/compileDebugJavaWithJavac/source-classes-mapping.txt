@@ -1,0 +1,20 @@
+com/capovela/tem/fit/GoogleFitModule.java
+ com.capovela.tem.fit.GoogleFitModule
+com/capovela/tem/BuildConfig.java
+ com.capovela.tem.BuildConfig
+com/capovela/tem/MainActivity.java
+ com.capovela.tem.MainActivity
+com/capovela/tem/MainApplication.java
+ com.capovela.tem.MainApplication
+ com.capovela.tem.MainApplication$1
+com/capovela/tem/ReactNativeFlipper.java
+ com.helloworld.ReactNativeFlipper
+ com.helloworld.ReactNativeFlipper$1
+ com.helloworld.ReactNativeFlipper$2
+ com.helloworld.ReactNativeFlipper$2$1
+com/facebook/react/PackageList.java
+ com.facebook.react.PackageList
+com/capovela/tem/fit/GoogleFitAuthorization.java
+ com.capovela.tem.fit.GoogleFitAuthorization
+com/capovela/tem/MainPackage.java
+ com.capovela.tem.MainPackage

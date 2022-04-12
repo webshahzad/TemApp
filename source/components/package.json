@@ -1,0 +1,6 @@
+{
+  "name": "components",
+  "devDependencies": {
+    "@types/react-native-datepicker": "^1.7.1"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "343337384390",
+    "firebase_url": "https://tem-qa-firebase.firebaseio.com",
+    "project_id": "tem-qa-firebase",
+    "storage_bucket": "tem-qa-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:343337384390:android:63332b522d870f7c0f1ac7",
+        "android_client_info": {
+          "package_name": "com.capovela.tem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "343337384390-nl0t772v211b3j2vljfmak2s13pe7l5e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBa0ZP4C3bCZ9E_dFgbsBFFhoMWBF6VFUU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "343337384390-nl0t772v211b3j2vljfmak2s13pe7l5e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "343337384390-lfvq1v3bnub8p9edhooppgtlpdlinjb4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tem.app",
+                "app_store_id": "1464115798"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
