@@ -58,6 +58,7 @@ export const AddTemates = (
             }}
           >
             <Text style={styles.temText}>THE TĒM APP</Text>
+            {/* Text style={styles.temText}>THE TĒM APP</Text> */}
           </View>
         </View>
       ),
