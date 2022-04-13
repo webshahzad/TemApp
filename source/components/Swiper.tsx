@@ -55,7 +55,7 @@ const SwiperComp = (props: any) => {
       props.onChangeLabel(label, screen, indexNumber)
     }
     return (
-      <TouchableHighlight style={{ height: 340 }}>
+      <TouchableHighlight style={{ height: 370 }}>
         <Swiper
           style={{}}
           height={200}

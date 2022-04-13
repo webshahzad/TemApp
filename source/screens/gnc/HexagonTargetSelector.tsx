@@ -87,10 +87,8 @@ export function HexagonTargetSelector(p: HexagonTargetSelectorProps): JSX.Elemen
       }
     })
 
-    const  valueMetric = tm.targetValue; 
-    // const arry = [];      
-    // arry.push(value)
-     console.log("valueMetric>",valueMetric)
+    // const  valueMetric = tm.targetValue; 
+    //  console.log("valueMetric>",valueMetric)
 
 
     cells.unshift({

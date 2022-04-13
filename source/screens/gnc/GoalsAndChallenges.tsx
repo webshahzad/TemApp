@@ -3,47 +3,47 @@
 // Proprietary and Confidential. All rights reserved. //
 //----------------------------------------------------//
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"
 import {
   StackScreenProps,
   createStackNavigator,
-} from "@react-navigation/stack";
+} from "@react-navigation/stack"
 import {
   createDrawerNavigator,
   DrawerScreenProps,
-} from "@react-navigation/drawer";
-import { DrawerActions } from "@react-navigation/native";
+} from "@react-navigation/drawer"
+import { DrawerActions } from "@react-navigation/native"
 import {
   Text,
   View,
   StyleSheet,
   Pressable,
-  TouchableOpacity,ScrollView
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { EmptyProps, RootStackPropsPerPath } from "navigation/params";
+  TouchableOpacity, ScrollView
+} from "react-native"
+import { SafeAreaView } from "react-native-safe-area-context"
+import { EmptyProps, RootStackPropsPerPath } from "navigation/params"
 
-import { reactive } from "common/reactive";
-import { doAsync } from "common/doAsync";
-import { NavigationTabs } from "components/NavigationTabs";
-import { MainBlueColor,GrayColor } from "components/Theme";
-import { GoalsAndChallengesList } from "./GoalsAndChallengesList";
-import { GoalsAndChallengesSideMenu } from "./GoalsAndChallengesSideMenu";
-import { App } from "models/app/App";
-import { GoalFilter } from "models/app/GoalsAndChallenges";
-import { ChatHeader } from "components/Header";
-import CircularProgress from "components/CircularProgress";
-import { useNavigation } from "@react-navigation/native";
+import { reactive } from "common/reactive"
+import { doAsync } from "common/doAsync"
+import { NavigationTabs } from "components/NavigationTabs"
+import { MainBlueColor, GrayColor } from "components/Theme"
+import { GoalsAndChallengesList } from "./GoalsAndChallengesList"
+import { GoalsAndChallengesSideMenu } from "./GoalsAndChallengesSideMenu"
+import { App } from "models/app/App"
+import { GoalFilter } from "models/app/GoalsAndChallenges"
+import { ChatHeader } from "components/Header"
+import CircularProgress from "components/CircularProgress"
+import { useNavigation } from "@react-navigation/native"
 // import { ScrollView } from 'react-native-gesture-handler'
 type LocalDrawerPropsPerPath = {
-  LocalStack: EmptyProps;
-};
+  LocalStack: EmptyProps
+}
 
-const Drawer = createDrawerNavigator<LocalDrawerPropsPerPath>();
+const Drawer = createDrawerNavigator<LocalDrawerPropsPerPath>()
 
 type LocalStackPropsPerPath = {
-  Local: EmptyProps;
-};
+  Local: EmptyProps
+}
 
 export function GoalsAndChallengesWithSideMenu(
   p: StackScreenProps<RootStackPropsPerPath, "GoalsAndChallenges">
@@ -60,10 +60,10 @@ export function GoalsAndChallengesWithSideMenu(
         options={{ swipeEnabled: false }}
       />
     </Drawer.Navigator>
-  );
+  )
 }
 
-const Stack = createStackNavigator<LocalStackPropsPerPath>();
+const Stack = createStackNavigator<LocalStackPropsPerPath>()
 
 function LocalStack(
   p: DrawerScreenProps<LocalDrawerPropsPerPath, "LocalStack">
@@ -76,56 +76,58 @@ function LocalStack(
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
-  );
+  )
 }
 
 const GoalsAndChallenges = (
   p: StackScreenProps<LocalStackPropsPerPath, "Local">
 ): React.ReactElement => {
-  const navigation = useNavigation();
-  const manager = App.goalsAndChallenges;
-  const challenges = manager.getChallengesManger();
+  const navigation = useNavigation()
+  const manager = App.goalsAndChallenges
+  const challenges = manager.getChallengesManger()
 
   useEffect(() => {
-    void manager.currentTabList.loadItems();
-  }, []);
- 
-   const list=manager.gncManager.open
-  
+    void manager.currentTabList.loadItems()
+  }, [])
+
+  const list = manager.gncManager.open
+
   return reactive(() => {
     return (
       <SafeAreaView style={styles.container}>
         {/* <ScrollView> */}
         <View>
-          <ChatHeader rightIcon="cross" isChildren rightOnPress={()=> navigation.navigate("Main")}>
-          <View style={styles.filters}>
-            <NavigationTabs manager={manager.tabsManager}></NavigationTabs>
-          </View>
-            </ChatHeader>
-             
+          <ChatHeader rightIcon="cross" isChildren rightOnPress={() => navigation.navigate("Main")}>
+            <View style={styles.filters}>
+              <NavigationTabs manager={manager.tabsManager}></NavigationTabs>
+            </View>
+          </ChatHeader>
+
           <Pressable style={styles.headerButton} onPress={async () => {
-              await manager.prepareSideMenu(
-                manager.gncManager.upcoming,
-                "Future",
-                "You do not have any future challenges or goals"
-              );
-              p.navigation.dispatch(DrawerActions.openDrawer());
-            }}   >
+            await manager.prepareSideMenu(
+              manager.gncManager.upcoming,
+              "Future",
+              "You do not have any future challenges or goals"
+            )
+            p.navigation.dispatch(DrawerActions.openDrawer())
+          }}   >
             <Text style={styles.headerButtonText}>Upcoming  ({list.pendingCount}) </Text>
             {/* <Icon name='chevron-right' size={12} style={styles.arrow}></Icon> */}
           </Pressable>
           <Pressable style={styles.headerButton} onPress={async () => {
-              await manager.prepareSideMenu(
-                manager.gncManager.completed,
-                "Past",
-                "You do not have any past challenges or goals"
-              );
-              p.navigation.dispatch(DrawerActions.openDrawer());
-            }}  >
+            await manager.prepareSideMenu(
+              manager.gncManager.completed,
+              "Past",
+              "You do not have any past challenges or goals"
+            )
+            p.navigation.dispatch(DrawerActions.openDrawer())
+          }}  >
             <Text style={styles.headerButtonText}>Past</Text>
             {/* <Icon name='chevron-right' size={12} style={styles.arrow}></Icon> */}
           </Pressable>
         </View>
+
+        {/* -------List of Goal and Challenges--------- */}
 
         <View style={styles.listContainer}>
           {manager.tabsManager.currentNavigation === GoalFilter.All && (
@@ -139,9 +141,9 @@ const GoalsAndChallenges = (
                       manager.gncManager.upcoming,
                       "Future",
                       "You do not have any future challenges or goals"
-                    );
-                    p.navigation.dispatch(DrawerActions.openDrawer());
-                  });
+                    )
+                    p.navigation.dispatch(DrawerActions.openDrawer())
+                  })
                 },
                 onCompletedPress: () => {
                   doAsync(async () => {
@@ -149,17 +151,17 @@ const GoalsAndChallenges = (
                       manager.gncManager.completed,
                       "Past",
                       "You do not have any past challenges or goals"
-                    );
-                    p.navigation.dispatch(DrawerActions.openDrawer());
-                  });
+                    )
+                    p.navigation.dispatch(DrawerActions.openDrawer())
+                  })
                 },
               }}
             />
           )}
 
           {manager.tabsManager.currentNavigation === GoalFilter.Goals && (
-            <GoalsAndChallengesList 
-            
+            <GoalsAndChallengesList
+
               list={manager.goalsManager.open}
               listEmptyText="You do not have any open goals"
               header={{
@@ -169,9 +171,9 @@ const GoalsAndChallenges = (
                       manager.goalsManager.upcoming,
                       "Future goals",
                       "You do not have any future goals"
-                    );
-                    p.navigation.dispatch(DrawerActions.openDrawer());
-                  });
+                    )
+                    p.navigation.dispatch(DrawerActions.openDrawer())
+                  })
                 },
                 onCompletedPress: () => {
                   doAsync(async () => {
@@ -179,9 +181,9 @@ const GoalsAndChallenges = (
                       manager.goalsManager.completed,
                       "Past goals",
                       "You do not have any past goals"
-                    );
-                    p.navigation.dispatch(DrawerActions.openDrawer());
-                  });
+                    )
+                    p.navigation.dispatch(DrawerActions.openDrawer())
+                  })
                 },
               }}
             />
@@ -190,7 +192,7 @@ const GoalsAndChallenges = (
           {manager.tabsManager.currentNavigation === GoalFilter.Challenges && (
             <GoalsAndChallengesList
               list={challenges.open}
-              listEmptyText="You do not have any open challenges"
+              // listEmptyText="You do not have any open challenges"
               header={{
                 onPendingPress: () => {
                   doAsync(async () => {
@@ -198,9 +200,9 @@ const GoalsAndChallenges = (
                       challenges.upcoming,
                       "Future challenges",
                       "You do not have any future challenges"
-                    );
-                    p.navigation.dispatch(DrawerActions.openDrawer());
-                  });
+                    )
+                    p.navigation.dispatch(DrawerActions.openDrawer())
+                  })
                 },
                 onCompletedPress: () => {
                   doAsync(async () => {
@@ -208,32 +210,34 @@ const GoalsAndChallenges = (
                       challenges.completed,
                       "Past challenges",
                       "You do not have any past challenges"
-                    );
-                    p.navigation.dispatch(DrawerActions.openDrawer());
-                  });
+                    )
+                    p.navigation.dispatch(DrawerActions.openDrawer())
+                  })
                 },
               }}
             />
           )}
         </View>
+
+        
         <View style={styles.footer}>
-          <TouchableOpacity 
-            onPress={() => { 
+          <TouchableOpacity
+            onPress={() => {
               App.actionModal.show([
                 {
                   name: "Challenge",
                   onPress: () => {
-                    App.goalsAndChallenges.createChallenge();
+                    App.goalsAndChallenges.createChallenge()
                   },
                 },
                 {
                   name: "Goal",
 
                   onPress: () => {
-                    App.goalsAndChallenges.createGoal();
+                    App.goalsAndChallenges.createGoal()
                   },
                 },
-              ]);
+              ])
             }}
             style={styles.donetext1}
           >
@@ -255,9 +259,9 @@ const GoalsAndChallenges = (
         </View>
         {/* </ScrollView> */}
       </SafeAreaView>
-    );
-  });
-};
+    )
+  })
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -270,8 +274,8 @@ const styles = StyleSheet.create({
   listContainer: {
     // flex: 1,
     width: "100%",
-    justifyContent:'center',
-    alignItems:'center',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   filters: {
     width: "100%",
@@ -323,15 +327,15 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
   },
   headerButton: {
-    flexDirection: 'row',   
+    flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 15,
-    borderRadius:8,
+    borderRadius: 8,
     borderBottomWidth: 1,
     borderColor: GrayColor,
-    marginHorizontal:20,
-    margin:15,
+    marginHorizontal: 20,
+    margin: 15,
     backgroundColor: "#F7F7F7",
     shadowColor: "#000",
     shadowOffset: {
@@ -344,6 +348,6 @@ const styles = StyleSheet.create({
   },
   headerButtonText: {
     flex: 1,
-    
+
   },
-});
+})

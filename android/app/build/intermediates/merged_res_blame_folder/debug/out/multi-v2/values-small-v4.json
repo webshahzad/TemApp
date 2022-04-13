@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "F:\\Shahzad\\office\\Tem_backUp-08-04-22\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-small-v4\\values-small-v4.xml",
+            "outputFile": "E:\\CompanyProject\\Tem_dotwork_4-11-22\\gitBash\\TemApp\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-small-v4\\values-small-v4.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Micro_Soft\\.gradle\\caches\\transforms-2\\files-2.1\\a1b8721778bbafd4e2b63ce31bc04376\\material-1.1.0\\res\\values-small-v4\\values-small-v4.xml",
+                    "source": "C:\\Users\\HP\\.gradle\\caches\\transforms-2\\files-2.1\\a1b8721778bbafd4e2b63ce31bc04376\\material-1.1.0\\res\\values-small-v4\\values-small-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
