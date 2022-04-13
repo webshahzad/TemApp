@@ -29,7 +29,7 @@ export function MySchedule(
     return (
       <>
         <Text style={Theme.rightText}>My Schedule</Text>
-       
+
 
         <View
           style={{
@@ -45,41 +45,41 @@ export function MySchedule(
 
           }}
         >
-         
 
-            <View style={styles.outer}>
-              <View style={styles.inner}>
-                <SimpleGradientProgressbarView
-                  style={styles.box}
-                  fromColor="#B620E0"
-                  toColor="#F7B500"
-                  progress={account && account / 100}
-                  maskedCorners={[1, 1, 1, 1]}
-                />
-              </View>
 
-              <Pressable style={{ right: 30 }}>
-                <Text style={styles.percent}>
-                  {account ? `${account}%` : `0%`}
-                </Text>
-                <Pressable
-                // onPress={() =>
-                //   Transaction.run(() => (App.user.AccountabilityModel = true))
-                // }
-                >
-                  <Text style={styles.account}>Accountability</Text>
-                  <Text style={styles.index}>index</Text>
-                </Pressable>
-              </Pressable>
+          <View style={styles.outer}>
+            <View style={styles.inner}>
+              <SimpleGradientProgressbarView
+                style={styles.box}
+                fromColor="#B620E0"
+                toColor="#F7B500"
+                progress={account && account / 100}
+                maskedCorners={[1, 1, 1, 1]}
+              />
             </View>
-         
-         
+
+            <Pressable style={{ right: 30 }}>
+              <Text style={styles.percent}>
+                {account ? `${account}%` : `0%`}
+              </Text>
+              <Pressable
+              // onPress={() =>
+              //   Transaction.run(() => (App.user.AccountabilityModel = true))
+              // }
+              >
+                <Text style={styles.account}>Accountability</Text>
+                <Text style={styles.index}>index</Text>
+              </Pressable>
+            </Pressable>
+          </View>
+
+
 
 
           <ViewCalender />
         </View>
 
-     
+
 
         {/* <Modal 
           style={styles.centeredView}
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     top: -20,
-    marginBottom:35,
+    marginBottom: 35,
 
 
   },

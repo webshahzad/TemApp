@@ -1,46 +1,50 @@
-import CircularProgress from "components/CircularProgress";
-import { App } from "models/app/App";
-import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Theme } from "components/Theme";
+import CircularProgress from "components/CircularProgress"
+import { App } from "models/app/App"
+import React, { useState } from "react"
+import { StyleSheet, Text, TouchableOpacity, View, ScrollView } from "react-native"
+import { Theme } from "components/Theme"
 import {
   PersonalLeaderCard,
   PersonalLeaderList,
-} from "screens/leaderboard/PersonalLeaderboard";
-import { useNavigation } from "@react-navigation/native";
+} from "screens/leaderboard/PersonalLeaderboard"
+import { useNavigation } from "@react-navigation/native"
 
 export function MyCommunity(): JSX.Element {
-  const navigation = useNavigation();
-  const stored = App?.leaderboard.stored;
+  const navigation = useNavigation()
+  const stored = App?.leaderboard.stored
 
-  const [value, setValue] = useState(0);
-  const handleFeedProgress=()=>{
-    setValue(100);
+  const [value, setValue] = useState(0)
+  const handleFeedProgress = () => {
+    setValue(100)
     setTimeout(() => {
-      navigation.navigate("Feed")  
+      navigation.navigate("Feed")
 
-    }, 2000);
+    }, 2000)
   }
-  const handleViewProgress=()=>{
-    setValue(100);
+  const handleViewProgress = () => {
+    setValue(100)
     setTimeout(() => {
-      navigation.navigate("ImageSelection") 
-    
-    }, 2000);
+      navigation.navigate("ImageSelection")
+
+    }, 2000)
   }
   return (
     <>
       <Text style={Theme.rightText}>MY COMMUNITY</Text>
       <View style={{ justifyContent: "center", alignItems: "center" }}>
         <View style={{ display: "flex", flexDirection: "row" }}>
+
           <View style={styles.main_view}>
+
             {stored && (
               <PersonalLeaderCard
                 topScoreMember={stored.topScoreMember}
                 myRank={stored.myRank}
               />
             )}
+
             <PersonalLeaderList />
+
           </View>
 
           <View>
@@ -61,7 +65,7 @@ export function MyCommunity(): JSX.Element {
           </View>
           <View>
             <TouchableOpacity
-                            onPress={handleFeedProgress}
+              onPress={handleFeedProgress}
 
               style={styles.viewFeed}
             >
@@ -82,7 +86,7 @@ export function MyCommunity(): JSX.Element {
         </View>
       </View>
     </>
-  );
+  )
   // });
 }
 const styles = StyleSheet.create({
@@ -184,4 +188,4 @@ const styles = StyleSheet.create({
     textShadowRadius: 5,
     shadowColor: "#fff",
   },
-});
+})

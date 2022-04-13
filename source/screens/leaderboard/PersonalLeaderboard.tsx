@@ -3,34 +3,34 @@
 // Proprietary and Confidential. All rights reserved. //
 //----------------------------------------------------//
 
-import React from "react";
-import { StackScreenProps } from "@react-navigation/stack";
-import { reactive } from "common/reactive";
-import { StyleSheet, View, Pressable, Text, Alert } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Ref } from "reactronic";
-import Icon from "react-native-vector-icons/FontAwesome5";
-import { ScrollView } from "react-native-gesture-handler";
-import { DashboardStackPropsPerPath } from "navigation/params";
-import { InputBadge } from "components/InputBadge";
-import { Hexagon } from "components/Hexagon/Hexagon";
-import { App } from "models/app/App";
-import { UserInfo } from "models/data/UserInfo";
-import { SwipeRow } from "react-native-swipe-list-view";
-import { Avatar } from "components/Avatar";
-import { MainBlueColor } from "components/Theme";
-import { showUserDetails } from "screens/profile/OtherUser";
-import { doAsync } from "common/doAsync";
-import { ChallengeMemberType } from "models/data/GoalOrChallenge";
-import { LeaderGroup } from "models/data/GoalChallengeDetailsModel";
-import { useNavigation } from "@react-navigation/native";
+import React from "react"
+import { StackScreenProps } from "@react-navigation/stack"
+import { reactive } from "common/reactive"
+import { StyleSheet, View, Pressable, Text, Alert } from "react-native"
+import { SafeAreaView } from "react-native-safe-area-context"
+import { Ref } from "reactronic"
+import Icon from "react-native-vector-icons/FontAwesome5"
+import { ScrollView } from "react-native-gesture-handler"
+import { DashboardStackPropsPerPath } from "navigation/params"
+import { InputBadge } from "components/InputBadge"
+import { Hexagon } from "components/Hexagon/Hexagon"
+import { App } from "models/app/App"
+import { UserInfo } from "models/data/UserInfo"
+import { SwipeRow } from "react-native-swipe-list-view"
+import { Avatar } from "components/Avatar"
+import { MainBlueColor } from "components/Theme"
+import { showUserDetails } from "screens/profile/OtherUser"
+import { doAsync } from "common/doAsync"
+import { ChallengeMemberType } from "models/data/GoalOrChallenge"
+import { LeaderGroup } from "models/data/GoalChallengeDetailsModel"
+import { useNavigation } from "@react-navigation/native"
 
 export const PersonalLeaderboard = (
   p: StackScreenProps<DashboardStackPropsPerPath>
 ): React.ReactElement => {
   return reactive(() => {
-    const leaderboard = App?.leaderboard;
-    const stored = App?.leaderboard.stored;
+    const leaderboard = App?.leaderboard
+    const stored = App?.leaderboard.stored
     return (
       <SafeAreaView style={styles.page}>
         {stored ? (
@@ -50,9 +50,9 @@ export const PersonalLeaderboard = (
                       tematesToAddRef: Ref.to(App?.leaderboard).tematesToAdd,
                       disabledTematesRef: Ref.to(App?.leaderboard.stored)?.data, // disable already added temates
                       onApply: async () => {
-                        await App.leaderboard.addTematesToLeaderboard();
+                        await App.leaderboard.addTematesToLeaderboard()
                       },
-                    });
+                    })
                   })
                 }
               >
@@ -82,8 +82,8 @@ export const PersonalLeaderboard = (
 
                   {stored.data.map((user) => {
                     if (user.user_id === stored.myRank?.user_id)
-                      return LeaderboardRow(user);
-                    else return SwipeableLeaderboardRow(user);
+                      return LeaderboardRow(user)
+                    else return SwipeableLeaderboardRow(user)
                   })}
                 </View>
               ) : null}
@@ -91,103 +91,109 @@ export const PersonalLeaderboard = (
           </>
         ) : null}
       </SafeAreaView>
-    );
-  });
-};
+    )
+  })
+}
 
 export function PersonalLeaderList(p: {}): JSX.Element {
-  const navigation = useNavigation();
-  const stored = App?.leaderboard.stored;
-  const lists = stored?.data?.slice(0, 4);
+  const navigation = useNavigation()
+  const stored = App?.leaderboard.stored
+  const lists = stored?.data?.slice(0, 8)
   return (
     <>
-      {lists?.map((user) => {
-        const userRow =
-          user.user_id == App.leaderboard?.stored?.myRank?.user_id;
-        return (
-          // <View
-          //   style={{
-          //     marginTop:5,
-          //     display: "flex",
-          //     flexDirection: "row",
-          //     overflow: "hidden",
-          //     justifyContent: "center",
-          //     alignItems: "center",
-          //   }}
-          // >
-          //   <View style={userRow ? styles.leaderBadge : styles.listBadge}>
-          //     <Text
-          //       style={[
-          //         styles.rankText,
-          //         { color: userRow ? "white" : MainBlueColor },
-          //       ]}
-          //     >
-          //       {user.rank}
-          //     </Text>
-          //   </View>
-          //   {!userRow && (
-          //     <Avatar
-          //       source={user.profile_pic}
-          //       size={UserAvatarSize}
-          //       style={styles.userAvatar}
-          //     />
-          //   )}
-          //   <Text style={styles.userName} numberOfLines={1}>
-          //     {user.first_name} {user.last_name}
-          //   </Text>
-          // </View>
-          <View
-          style={{
-            flexWrap:"wrap",
-            overflow:'hidden',
-            marginTop:10,
-          }}
-        >
-         <View style={{flexDirection: "row"}}>
-         <View style={userRow ? styles.leaderBadge : styles.listBadge}>
-            <Text
-              style={[
-                styles.rankText,
-                { color: userRow ? "white" : MainBlueColor },
-              ]}
-            >
-              {user.rank}
-            </Text>
-          </View>
-          {!userRow && (
-            <Avatar
-              source={user.profile_pic}
-              size={UserAvatarSize}
-              style={styles.userAvatar}
-            />
-          )}
-          <Text style={styles.userName} numberOfLines={1}>
-            {user.first_name} {user.last_name}
-          </Text>
-         </View>
-        </View>
+      <ScrollView showsVerticalScrollIndicator={false} >
+        {lists?.map((user) => {
+          const userRow =
+            user.user_id == App.leaderboard?.stored?.myRank?.user_id
+          return (
+            // <View
+            //   style={{
+            //     marginTop:5,
+            //     display: "flex",
+            //     flexDirection: "row",
+            //     overflow: "hidden",
+            //     justifyContent: "center",
+            //     alignItems: "center",
+            //   }}
+            // >
+            //   <View style={userRow ? styles.leaderBadge : styles.listBadge}>
+            //     <Text
+            //       style={[
+            //         styles.rankText,
+            //         { color: userRow ? "white" : MainBlueColor },
+            //       ]}
+            //     >
+            //       {user.rank}
+            //     </Text>
+            //   </View>
+            //   {!userRow && (
+            //     <Avatar
+            //       source={user.profile_pic}
+            //       size={UserAvatarSize}
+            //       style={styles.userAvatar}
+            //     />
+            //   )}
+            //   <Text style={styles.userName} numberOfLines={1}>
+            //     {user.first_name} {user.last_name}
+            //   </Text>
+            // </View>
 
-        );
-      })}
+
+
+
+            <View
+              style={{
+                flexWrap: "wrap",
+                overflow: 'hidden',
+                marginTop: 10,
+              }}
+            >
+              <View style={{ flexDirection: "row" }}>
+                <View style={userRow ? styles.leaderBadge : styles.listBadge}>
+                  <Text
+                    style={[
+                      styles.rankText,
+                      { color: userRow ? "white" : MainBlueColor },
+                    ]}
+                  >
+                    {user.rank}
+                  </Text>
+                </View>
+                {!userRow && (
+                  <Avatar
+                    source={user.profile_pic}
+                    size={UserAvatarSize}
+                    style={styles.userAvatar}
+                  />
+                )}
+                <Text style={styles.userName} numberOfLines={1}>
+                  {user.first_name} {user.last_name}
+                </Text>
+              </View>
+            </View>
+
+          )
+        })}
+      </ScrollView>
       <Text
         style={styles.allText}
         onPress={() => {
-          navigation.navigate("Leaderboard");
+          navigation.navigate("Leaderboard")
         }}
       >
         All..
       </Text>
     </>
-  );
+  )
 }
 
 export function PersonalLeaderCard(p: {
-  topScoreMember?: UserInfo | LeaderGroup;
-  leaderType?: ChallengeMemberType;
-  myRank?: UserInfo;
-  myRankPlaceholder?: JSX.Element;
+  topScoreMember?: UserInfo | LeaderGroup
+  leaderType?: ChallengeMemberType
+  myRank?: UserInfo
+  myRankPlaceholder?: JSX.Element
 }): JSX.Element {
-  const leaderType = p.leaderType ?? ChallengeMemberType.User;
+  const leaderType = p.leaderType ?? ChallengeMemberType.User
   return (
     <View style={styles.leaderCard}>
       {p.topScoreMember ? (
@@ -195,25 +201,25 @@ export function PersonalLeaderCard(p: {
       ) : null}
       {UserBadge(p.myRank, p.myRankPlaceholder)}
     </View>
-  );
+  )
 }
 
 function LeaderBadge(
   topScoreMember: UserInfo | LeaderGroup,
   leaderType: ChallengeMemberType
 ): React.ReactElement {
-  let image: string | undefined;
-  let name: string;
+  let image: string | undefined
+  let name: string
   if (leaderType === ChallengeMemberType.User) {
-    const leader = topScoreMember as UserInfo;
-    image = leader.profile_pic;
+    const leader = topScoreMember as UserInfo
+    image = leader.profile_pic
     name =
-      (leader.first_name ? leader.first_name + " " : "") + leader.last_name;
+      (leader.first_name ? leader.first_name + " " : "") + leader.last_name
   } else {
     // ChallengeLeaderType.Team
-    const leader = topScoreMember as LeaderGroup;
-    image = leader.image;
-    name = leader.name;
+    const leader = topScoreMember as LeaderGroup
+    image = leader.image
+    name = leader.name
   }
   return (
     <View style={styles.leaderInfo}>
@@ -225,7 +231,7 @@ function LeaderBadge(
       />
       <Text style={styles.userName}> {name}</Text>
     </View>
-  );
+  )
 }
 
 function UserBadge(
@@ -246,7 +252,7 @@ function UserBadge(
         placeholder
       )}
     </View>
-  );
+  )
 }
 
 function SwipeableLeaderboardRow(user: UserInfo): React.ReactElement {
@@ -255,7 +261,7 @@ function SwipeableLeaderboardRow(user: UserInfo): React.ReactElement {
       {LeaderboardRowControl(user)}
       {LeaderboardRow(user)}
     </SwipeRow>
-  );
+  )
 }
 
 function LeaderboardRowControl(user: UserInfo): React.ReactElement {
@@ -268,7 +274,7 @@ function LeaderboardRowControl(user: UserInfo): React.ReactElement {
         <Text style={styles.rowControlText}>Delete</Text>
       </Pressable>
     </View>
-  );
+  )
 }
 
 function deleteFromLeaderboard(user: UserInfo): void {
@@ -278,11 +284,11 @@ function deleteFromLeaderboard(user: UserInfo): void {
       text: "Yes",
       onPress: () =>
         doAsync(async () => {
-          await App.leaderboard.removeFromLeaderboard(user);
-          await App.leaderboard.stored?.load();
+          await App.leaderboard.removeFromLeaderboard(user)
+          await App.leaderboard.stored?.load()
         }),
     },
-  ]);
+  ])
 }
 
 function LeaderboardRow(user: UserInfo): React.ReactElement {
@@ -292,7 +298,7 @@ function LeaderboardRow(user: UserInfo): React.ReactElement {
       style={styles.row}
       onPress={() => {
         if (user.user_id !== App.leaderboard?.stored?.myRank?.user_id) {
-          showUserDetails(user);
+          showUserDetails(user)
         }
       }}
     >
@@ -335,13 +341,13 @@ function LeaderboardRow(user: UserInfo): React.ReactElement {
       </View>
       <Text style={[styles.score, styles.scoreValue]}>{user.score}</Text>
     </Pressable>
-  );
+  )
 }
 
-const LeaderAvatarSize = 20;
-const LeaderResultSize = 20;
-const LeaderAvatarBorderWidth = 2;
-const UserAvatarSize = 15;
+const LeaderAvatarSize = 20
+const LeaderResultSize = 20
+const LeaderAvatarBorderWidth = 2
+const UserAvatarSize = 15
 
 const styles = StyleSheet.create({
   page: {
@@ -406,7 +412,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "bold",
     textTransform: "capitalize",
-   },
+  },
   allText: {
     textAlign: "right",
     color: "#0B82DC",
@@ -510,9 +516,9 @@ const styles = StyleSheet.create({
     color: "black",
     // fontWeight: 'bold',
     fontSize: 8,
-    marginTop:2,
-    marginLeft:1,
- 
+    marginTop: 2,
+    marginLeft: 1,
+
   },
   location: {
     flexDirection: "row",
@@ -540,7 +546,7 @@ const styles = StyleSheet.create({
     textShadowRadius: 3,
     shadowColor: "black",
     fontWeight: "600",
-    fontSize:12,
-    
+    fontSize: 12,
+
   },
-});
+})
