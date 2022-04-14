@@ -301,7 +301,7 @@ function ChallengeProgress(): JSX.Element | null {
           >
             <View style={styles.detailTab}>
               <Text style={styles.tabText}>
-                FUNDRAISING | $65.00 of $250 
+                FUNDRAISING |  ${model?.fundraising?.collectedAmount} of ${model?.fundraising?.goalAmount} 
                 {/* FUNDRAISING | {collected} Of {targetValue} */}
                
               </Text>
