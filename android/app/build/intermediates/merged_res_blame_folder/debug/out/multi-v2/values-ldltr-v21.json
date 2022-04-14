@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "F:\\Shahzad\\office\\Tem_backUp-08-04-22\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ldltr-v21\\values-ldltr-v21.xml",
+            "outputFile": "/home/azharcool/AzharDrive/projects/Reactnative/TempApp-v1/TemApp/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ldltr-v21/values-ldltr-v21.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Micro_Soft\\.gradle\\caches\\transforms-2\\files-2.1\\330bc205c74d549cb31e45b23b25d45f\\appcompat-1.2.0\\res\\values-ldltr-v21\\values-ldltr-v21.xml",
+                    "source": "/home/azharcool/.gradle/caches/transforms-2/files-2.1/330bc205c74d549cb31e45b23b25d45f/appcompat-1.2.0/res/values-ldltr-v21/values-ldltr-v21.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

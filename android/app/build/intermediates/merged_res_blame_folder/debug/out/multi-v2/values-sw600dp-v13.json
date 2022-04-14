@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "F:\\Shahzad\\office\\Tem_backUp-08-04-22\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+            "outputFile": "/home/azharcool/AzharDrive/projects/Reactnative/TempApp-v1/TemApp/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sw600dp-v13/values-sw600dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Micro_Soft\\.gradle\\caches\\transforms-2\\files-2.1\\a1b8721778bbafd4e2b63ce31bc04376\\material-1.1.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "source": "/home/azharcool/.gradle/caches/transforms-2/files-2.1/a1b8721778bbafd4e2b63ce31bc04376/material-1.1.0/res/values-sw600dp-v13/values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,10,11,12,13,14",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Micro_Soft\\.gradle\\caches\\transforms-2\\files-2.1\\330bc205c74d549cb31e45b23b25d45f\\appcompat-1.2.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "source": "/home/azharcool/.gradle/caches/transforms-2/files-2.1/330bc205c74d549cb31e45b23b25d45f/appcompat-1.2.0/res/values-sw600dp-v13/values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
