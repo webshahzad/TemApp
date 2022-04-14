@@ -64,7 +64,7 @@ export function ChallengeDetails(
   p: StackScreenProps<RootStackPropsPerPath, "ChallengeDetails">
 ): JSX.Element | null {
   const model = App.goalsAndChallenges.currentGoalChallenge;
-  console.log("challengeModel", model)
+  // console.log("challengeModel--->>>>", JSON.stringify(model,null,2))
   if (!model) return null;
 
   React.useEffect(() => {

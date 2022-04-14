@@ -3,8 +3,8 @@
 // Proprietary and Confidential. All rights reserved. //
 //----------------------------------------------------//
 
-import React from "react";
-import { reactive } from "common/reactive";
+import React from "react"
+import { reactive } from "common/reactive"
 import {
   Text,
   View,
@@ -18,13 +18,13 @@ import {
   ImageSourcePropType,
   Alert,
   TouchableOpacity,
-} from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome5";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { StackScreenProps } from "@react-navigation/stack";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+} from "react-native"
+import Icon from "react-native-vector-icons/FontAwesome5"
+import { SafeAreaView } from "react-native-safe-area-context"
+import { StackScreenProps } from "@react-navigation/stack"
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs"
 
-import { EmptyProps, RootStackPropsPerPath } from "navigation/params";
+import { EmptyProps, RootStackPropsPerPath } from "navigation/params"
 import {
   ActivityScore,
   ActivityStatus,
@@ -39,59 +39,59 @@ import {
   getMetricValueStringFromScore,
   GoalTarget,
   Metrics,
-} from "models/data/GoalOrChallenge";
-import { HexagonGoalProgressViewer } from "./HexagonGoalProgressViewer";
+} from "models/data/GoalOrChallenge"
+import { HexagonGoalProgressViewer } from "./HexagonGoalProgressViewer"
 import {
   MainBlueColor,
   BlueBackground,
   LightBlueColor,
   GrayColor,
-} from "components/Theme";
-import { Hexagon } from "components/Hexagon/Hexagon";
-import { CellCustomization } from "components/Hexagon/HexagonProps";
-import { formatDate, formatGoalStartDate } from "common/datetime";
-import { DefaultHexGradient } from "common/constants";
-import { doAsync } from "common/doAsync";
+} from "components/Theme"
+import { Hexagon } from "components/Hexagon/Hexagon"
+import { CellCustomization } from "components/Hexagon/HexagonProps"
+import { formatDate, formatGoalStartDate } from "common/datetime"
+import { DefaultHexGradient } from "common/constants"
+import { doAsync } from "common/doAsync"
 import {
   ActivityGroup,
   GoalChallengeDetailsModel,
-} from "models/data/GoalChallengeDetailsModel";
-import { Avatar } from "components/Avatar";
-import { App } from "models/app/App";
-import { standalone, Transaction } from "reactronic";
-import { populate } from "common/populate";
-import { DetailsRightHeader } from "./DetailsRightHeader";
-import { Chatter } from "./Chatter";
-import { HexagonChallengeMetricsViewer } from "./HexagonChallengeMetricsViewer";
-import { UserInfo } from "models/data/UserInfo";
-import { Address } from "models/data/Address";
-import { HexagonProgressViewer } from "./HexagonProgressViewer";
-import { Monitors } from "models/app/Monitors";
-import ActivityImage from "assets/icons/act/act.png";
-import { ChatHeader } from "components/Header";
-import { ShadowButton } from "components/ShadowButton";
-import CircularProgress from "components/CircularProgress";
-import Dummy from "assets/images/user-dummy.png";
-import Modal from "react-native-modal";
-import { Neomorph } from "react-native-neomorph-shadows";
+} from "models/data/GoalChallengeDetailsModel"
+import { Avatar } from "components/Avatar"
+import { App } from "models/app/App"
+import { standalone, Transaction } from "reactronic"
+import { populate } from "common/populate"
+import { DetailsRightHeader } from "./DetailsRightHeader"
+import { Chatter } from "./Chatter"
+import { HexagonChallengeMetricsViewer } from "./HexagonChallengeMetricsViewer"
+import { UserInfo } from "models/data/UserInfo"
+import { Address } from "models/data/Address"
+import { HexagonProgressViewer } from "./HexagonProgressViewer"
+import { Monitors } from "models/app/Monitors"
+import ActivityImage from "assets/icons/act/act.png"
+import { ChatHeader } from "components/Header"
+import { ShadowButton } from "components/ShadowButton"
+import CircularProgress from "components/CircularProgress"
+import Dummy from "assets/images/user-dummy.png"
+import Modal from "react-native-modal"
+import { Neomorph } from "react-native-neomorph-shadows"
 // import Honey from "assets/images/honey-blue-border/honey.png"
-import Polygon from "assets/Polygon.png";
-import { TargetMetricsManager } from "models/app/TargetMetricsManager";
-import { useNavigation } from "@react-navigation/native";
+import Polygon from "assets/Polygon.png"
+import { TargetMetricsManager } from "models/app/TargetMetricsManager"
+import { useNavigation } from "@react-navigation/native"
 
 export type GoalChallengeDetailsPropsPerPath = {
-  Progress: EmptyProps;
-  Fundraising: EmptyProps;
-  Temates: EmptyProps;
-};
+  Progress: EmptyProps
+  Fundraising: EmptyProps
+  Temates: EmptyProps
+}
 
-const Tabs = createMaterialTopTabNavigator<GoalChallengeDetailsPropsPerPath>();
+const Tabs = createMaterialTopTabNavigator<GoalChallengeDetailsPropsPerPath>()
 
 export function GoalDetails(
   p: StackScreenProps<RootStackPropsPerPath, "GoalDetails">
 ): JSX.Element | null {
-  const model = App.goalsAndChallenges.currentGoalChallenge;
-  if (!model) return null;
+  const model = App.goalsAndChallenges.currentGoalChallenge
+  if (!model) return null
 
   React.useEffect(() => {
     // p.navigation.setOptions({
@@ -104,10 +104,10 @@ export function GoalDetails(
     //   },
     // });
     return () => {
-      App.goalsAndChallenges.resetCurrentGoalChallenge();
-    };
-  }, []);
-  const navigation = useNavigation();
+      App.goalsAndChallenges.resetCurrentGoalChallenge()
+    }
+  }, [])
+  const navigation = useNavigation()
   return reactive(() => {
     return (
       <>
@@ -157,37 +157,37 @@ export function GoalDetails(
         {/* </View> */}
         <GoallDetails />
       </>
-    );
-  });
+    )
+  })
 }
 
 function GoalProgress(): JSX.Element | null {
   return reactive(() => {
-    const model = App.goalsAndChallenges.currentGoalChallenge;
-    if (!model) return null;
+    const model = App.goalsAndChallenges.currentGoalChallenge
+    if (!model) return null
 
-    const status: ActivityStatus = model.status;
+    const status: ActivityStatus = model.status
     const target: GoalTarget =
       model.target !== undefined && model.target.length
         ? model.target[0]
-        : EmptyGoalTarget;
+        : EmptyGoalTarget
 
-    const score: number = model.totalScore ?? 0;
-    const scorePercent: number = model.scorePercentage ?? 0;
+    const score: number = model.totalScore ?? 0
+    const scorePercent: number = model.scorePercentage ?? 0
     const isProgressVisible =
-      status !== ActivityStatus.Upcoming && target !== undefined;
+      status !== ActivityStatus.Upcoming && target !== undefined
 
     const totalGoalTarget: number = model.isPerPersonGoal
       ? target.value * model.memberCount
-      : target.value;
+      : target.value
 
     const targetValue: string =
       getMetricValueString(target.matric, totalGoalTarget) +
       (target.matric === Metrics.TotalActivityTime
         ? ""
-        : " " + getMetricMeasureText(target.matric));
+        : " " + getMetricMeasureText(target.matric))
 
-    const valueFontSize: number = 16;
+    const valueFontSize: number = 16
     const infoCells: CellCustomization[] = [
       {
         content: {
@@ -217,36 +217,36 @@ function GoalProgress(): JSX.Element | null {
         },
         backgroundGradient: DefaultHexGradient,
       },
-    ];
+    ]
 
-    let joinButton: JSX.Element | null = null;
+    let joinButton: JSX.Element | null = null
     if (!model.isJoined || status === ActivityStatus.Upcoming) {
-      const joinText: string = model.isJoined ? "Joined" : "Join";
+      const joinText: string = model.isJoined ? "Joined" : "Join"
       const buttonColor: string = model.isJoined
         ? LightBlueColor
-        : MainBlueColor;
+        : MainBlueColor
       const onPress = model.isJoined
         ? undefined
         : () =>
-            doAsync(async () =>
-              standalone(() =>
-                Transaction.run(async () => {
-                  const message: string = await App.goalsAndChallenges.join(
+          doAsync(async () =>
+            standalone(() =>
+              Transaction.run(async () => {
+                const message: string = await App.goalsAndChallenges.join(
+                  model.gncType,
+                  model._id,
+                  model.listItem
+                )
+                const updatedDetails =
+                  await App.goalsAndChallenges.getDetails(
                     model.gncType,
                     model._id,
                     model.listItem
-                  );
-                  const updatedDetails =
-                    await App.goalsAndChallenges.getDetails(
-                      model.gncType,
-                      model._id,
-                      model.listItem
-                    );
-                  populate(model, updatedDetails);
-                  ToastAndroid.show(message, ToastAndroid.SHORT);
-                })
-              )
-            );
+                  )
+                populate(model, updatedDetails)
+                ToastAndroid.show(message, ToastAndroid.SHORT)
+              })
+            )
+          )
       joinButton = (
         <Pressable
           style={[styles.joinButton, { backgroundColor: buttonColor }]}
@@ -254,10 +254,10 @@ function GoalProgress(): JSX.Element | null {
         >
           <Text style={{ color: "white", fontSize: 17 }}>{joinText}</Text>
         </Pressable>
-      );
+      )
     }
 
-    const windowWidth = Dimensions.get("window").width;
+    const windowWidth = Dimensions.get("window").width
     return (
       <SafeAreaView style={styles.screen}>
         <ScrollView
@@ -311,29 +311,29 @@ function GoalProgress(): JSX.Element | null {
           </View>
         </ScrollView>
       </SafeAreaView>
-    );
-  });
+    )
+  })
 }
 
 export function Fundraising(): JSX.Element | null {
   return reactive(() => {
-    const model = App.goalsAndChallenges.currentGoalChallenge;
-    const fundraising = model?.fundraising;
+    const model = App.goalsAndChallenges.currentGoalChallenge
+    const fundraising = model?.fundraising
 
-    if (!model || !fundraising) return null;
+    if (!model || !fundraising) return null
 
-    const status: ActivityStatus = model.status;
+    const status: ActivityStatus = model.status
 
-    const percent: number | undefined = fundraising.percent();
-    const isDonateButtonVisible = status !== ActivityStatus.Completed;
+    const percent: number | undefined = fundraising.percent()
+    const isDonateButtonVisible = status !== ActivityStatus.Completed
 
     const targetValue: string =
       fundraising.goalAmount !== undefined
         ? "$" + fundraising.goalAmount
-        : "NO";
-    const collected = "$" + (fundraising.collectedAmount ?? 0);
+        : "NO"
+    const collected = "$" + (fundraising.collectedAmount ?? 0)
 
-    const valueFontSize: number = 16;
+    const valueFontSize: number = 16
     const infoCells: CellCustomization[] = [
       {
         content: {
@@ -363,9 +363,9 @@ export function Fundraising(): JSX.Element | null {
         },
         backgroundGradient: DefaultHexGradient,
       },
-    ];
+    ]
 
-    const windowWidth = Dimensions.get("window").width;
+    const windowWidth = Dimensions.get("window").width
     return (
       <SafeAreaView style={styles.screen}>
         <ScrollView
@@ -394,7 +394,7 @@ export function Fundraising(): JSX.Element | null {
                 { backgroundColor: MainBlueColor, marginTop: -windowWidth / 3 },
               ]}
               onPress={() => {
-                void App.goalsAndChallenges.openDonationPage(model);
+                void App.goalsAndChallenges.openDonationPage(model)
               }}
             >
               <Text style={{ color: "white", fontSize: 17 }}>Donate</Text>
@@ -425,20 +425,20 @@ export function Fundraising(): JSX.Element | null {
           </View>
         </ScrollView>
       </SafeAreaView>
-    );
-  });
+    )
+  })
 }
 
 function GoalTemates(): JSX.Element | null {
   return reactive(() => {
-    const model = App.goalsAndChallenges.currentGoalChallenge;
-    if (!model) return null;
+    const model = App.goalsAndChallenges.currentGoalChallenge
+    if (!model) return null
 
     const target: GoalTarget =
       model.target !== undefined && model.target.length
         ? model.target[0]
-        : EmptyGoalTarget;
-    const scoreTitle: string = getMetricMeasureTextForScoreTable(target.matric);
+        : EmptyGoalTarget
+    const scoreTitle: string = getMetricMeasureTextForScoreTable(target.matric)
     return (
       <View style={styles.screen}>
         <ScrollView
@@ -478,8 +478,8 @@ function GoalTemates(): JSX.Element | null {
                       type={ChallengeMemberType.User}
                       metric={target.matric}
                     />
-                  );
-                else return null;
+                  )
+                else return null
               })}
               {model.needToLoadMoreMemberScore() && (
                 <Pressable
@@ -497,38 +497,38 @@ function GoalTemates(): JSX.Element | null {
           </View>
         </ScrollView>
       </View>
-    );
-  });
+    )
+  })
 }
 
 export function ScoreRow(p: {
-  userScore: ActivityScore<UserInfo | ActivityGroup>;
-  type: ChallengeMemberType;
-  metric: Metrics | Metrics[];
-  showScoreHex?: boolean;
+  userScore: ActivityScore<UserInfo | ActivityGroup>
+  type: ChallengeMemberType
+  metric: Metrics | Metrics[]
+  showScoreHex?: boolean
 }): React.ReactElement | null {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(false)
 
-  const { userScore, metric } = p;
-  const showScoreHex: boolean = p.showScoreHex ?? false;
+  const { userScore, metric } = p
+  const showScoreHex: boolean = p.showScoreHex ?? false
 
-  if (userScore.userInfo === undefined) return null;
+  if (userScore.userInfo === undefined) return null
 
-  let scoreString: string;
+  let scoreString: string
   if (userScore.score !== undefined) {
-    const fract = userScore.score - Math.trunc(userScore.score);
-    const fractString = fract.toString();
+    const fract = userScore.score - Math.trunc(userScore.score)
+    const fractString = fract.toString()
     if (fractString.length > 4) {
-      scoreString = userScore.score.toFixed(2).toString();
+      scoreString = userScore.score.toFixed(2).toString()
     } else {
       // 0, 0.X or 0.XX
-      scoreString = userScore.score?.toString();
+      scoreString = userScore.score?.toString()
     }
   } else {
-    scoreString = "-";
+    scoreString = "-"
   }
 
-  let score: JSX.Element | undefined;
+  let score: JSX.Element | undefined
   if (showScoreHex)
     score = (
       <View style={[styles.rank, styles.hex]}>
@@ -544,28 +544,28 @@ export function ScoreRow(p: {
           ]}
         />
       </View>
-    );
-  else score = undefined;
+    )
+  else score = undefined
 
-  let image: number | string | undefined;
-  let name: string;
-  let address: Address | undefined;
+  let image: number | string | undefined
+  let name: string
+  let address: Address | undefined
   if (p.type === ChallengeMemberType.User) {
-    const user = p.userScore.userInfo as UserInfo | undefined;
+    const user = p.userScore.userInfo as UserInfo | undefined
 
-    image = user?.profile_pic;
-    name = (user?.first_name ? user?.first_name + " " : "") + user?.last_name;
-    address = user?.address;
+    image = user?.profile_pic
+    name = (user?.first_name ? user?.first_name + " " : "") + user?.last_name
+    address = user?.address
   } else {
     // ChallengeMemberType.Team
-    const team = p.userScore.userInfo as ActivityGroup | undefined;
-    image = team?.image;
-    name = team?.group_title ?? "Tēm";
-    address = undefined;
+    const team = p.userScore.userInfo as ActivityGroup | undefined
+    image = team?.image
+    name = team?.group_title ?? "Tēm"
+    address = undefined
   }
 
-  let metricValue: JSX.Element;
-  let multipleMetricValue: JSX.Element | undefined = undefined;
+  let metricValue: JSX.Element
+  let multipleMetricValue: JSX.Element | undefined = undefined
 
   if (metric instanceof Array) {
     // multiple values
@@ -576,14 +576,14 @@ export function ScoreRow(p: {
       >
         <Icon name={expanded ? "chevron-up" : "chevron-down"} size={14} />
       </Pressable>
-    );
+    )
     if (expanded) {
       // TODO: animate height
       multipleMetricValue = (
         <View style={styles.userChallengeScore}>
           <HexagonChallengeMetricsViewer metric={metric} score={userScore} />
         </View>
-      );
+      )
     }
   } else {
     // single value
@@ -591,7 +591,7 @@ export function ScoreRow(p: {
       <Text style={[styles.score, styles.scoreValue]}>
         {getMetricValueStringFromScore(metric, userScore)}
       </Text>
-    );
+    )
   }
 
   return (
@@ -683,77 +683,77 @@ export function ScoreRow(p: {
     //   </View>
     //   {multipleMetricValue}
     // </View>
-  );
+  )
 }
 
 export function Details(p: {
-  model: GoalChallengeDetailsModel;
-  percentOverride?: number;
+  model: GoalChallengeDetailsModel
+  percentOverride?: number
 }): JSX.Element | null {
-  const model = p.model;
-  const gncType = model.gncType;
+  const model = p.model
+  const gncType = model.gncType
 
   return reactive(() => {
-    const status: ActivityStatus = model?.status;
+    const status: ActivityStatus = model?.status
     const scorePercent: number =
-      p.percentOverride ?? model?.scorePercentage ?? 0;
+      p.percentOverride ?? model?.scorePercentage ?? 0
     const target: GoalTarget =
       model?.target !== undefined && model?.target.length
         ? model.target[0]
-        : EmptyGoalTarget;
+        : EmptyGoalTarget
     const typeLogoSource: ImageSourcePropType =
       p.model?.anyActivity || p.model?.activityTypes.length > 1
         ? ActivityImage
-        : { uri: p.model.activityTypes[0]?.logo ?? "" };
+        : { uri: p.model.activityTypes[0]?.logo ?? "" }
 
-    let info: JSX.Element;
+    let info: JSX.Element
     // TODO: call global App "timer" state
     if (gncType === ActivityType.Goal && status === ActivityStatus.Completed) {
-      const text = scorePercent < 100 ? "Goal Incomplete" : "Goal Complete";
-      info = <Text style={styles.pastGoalCompletionStatus}>{text}</Text>;
+      const text = scorePercent < 100 ? "Goal Incomplete" : "Goal Complete"
+      info = <Text style={styles.pastGoalCompletionStatus}>{text}</Text>
     } else {
-      const now: number = Date.now();
+      const now: number = Date.now()
       const timeInfo: string = getGoalChallengeTimeInfo(
         model.startDate,
         model.endDate,
         status,
         now
-      );
-      info = <Text style={styles.timeInfo}>{timeInfo}</Text>;
+      )
+      info = <Text style={styles.timeInfo}>{timeInfo}</Text>
     }
     if (gncType === ActivityType.Challenge) {
       const challengePeriod: string = `${formatDate(
         new Date(model.startDate)
-      )} to ${formatDate(new Date(model.endDate))}`;
+      )} to ${formatDate(new Date(model.endDate))}`
       info = (
         <>
           <Text style={styles.challengePeriodInfo}>{challengePeriod}</Text>
           {info}
         </>
-      );
+      )
     }
-    let perPersonGoalInfo: JSX.Element | null = null;
+    let perPersonGoalInfo: JSX.Element | null = null
     if (gncType === ActivityType.Goal && model.isPerPersonGoal) {
       perPersonGoalInfo = (
         <Text>
           {getMetricValueString(target.matric, target.value)}
           {getMetricMeasureText(target.matric)} per person
         </Text>
-      );
+      )
     }
 
-    const now: number = Date.now();
+    const now: number = Date.now()
     const timeInfo: string = getGoalChallengeTimeInfo(
       model.startDate,
       model.endDate,
       status,
       now
-    );
+    )
     return (
       <View style={styles.cardHead}>
         <View style={styles.cardHeadTop}>
           <View style={{}}>
-            <View style={{ marginTop: 10, right: 5}}>
+            <View style={{ marginTop: 10, right: 5 }}>
               <View style={{ right: 20 }}>
                 {/* <Text style={{ fontSize: 16 }}>{model.name}</Text> */}
                 {/* <Text >{model.getTypeName()}</Text> */}
@@ -765,9 +765,18 @@ export function Details(p: {
               </View>
               <View style={{ marginTop: 30 }}>
                 <Text style={styles.activity}>Metrics</Text>
-                <Text style={{ fontSize: 12, left: 45 }}>Total Activities</Text>
-                <Text style={{ fontSize: 12, left: 50 }}>Max Calories</Text>
-                <Text style={{ fontSize: 12, left: 45 }}>Total Distance</Text>
+                <Text style={{ fontSize: 12, left: 45 }}>
+                  {/* Total Activities */}
+                  {model.membersScore[0].totalActivites}
+                </Text>
+                <Text style={{ fontSize: 12, left: 45 }}>
+                  {/* Max Calories */}
+                  {model.membersScore[0].calories}
+                </Text>
+                <Text style={{ fontSize: 12, left: 45 }}>
+                  {/* Total Distance */}
+                  {model.membersScore[0].distanceCovered}
+                </Text>
               </View>
             </View>
             <View >
@@ -782,29 +791,30 @@ export function Details(p: {
         {perPersonGoalInfo}
         {info} */}
       </View>
-    );
-  });
+    )
+  })
 }
 export function GoallDetails(p: {
-  model: GoalChallengeDetailsModel;
-  percentOverride?: number;
+  model: GoalChallengeDetailsModel
+  percentOverride?: number
 }): JSX.Element | null {
   // const model = p.model;
   // const gncType = model.gncType;
-  const model = App.goalsAndChallenges.currentGoalChallenge;
-  const windowHeight = Dimensions.get("window").height;
-  const windowWidth = Dimensions.get("window").width;
+  const model = App.goalsAndChallenges.currentGoalChallenge
+  const windowHeight = Dimensions.get("window").height
+  const windowWidth = Dimensions.get("window").width
+  // console.log("model>>>>>>",JSON.stringify(model,null,2))
+  console.log("challengeModel--->>>>", JSON.stringify(model,null,2))
+  const isJoined = model?.isJoined
 
-  const isJoined = model?.isJoined;
-
-  const status: ActivityStatus = model?.status;
-  const now: number = Date.now();
+  const status: ActivityStatus = model?.status
+  const now: number = Date.now()
   const timeInfo: string = getGoalChallengeTimeInfo(
     model?.listItem?.startDate,
     model?.listItem?.endDate,
     status,
     now
-  );
+  )
   const monthNames = [
     "",
     "Jan",
@@ -819,30 +829,30 @@ export function GoallDetails(p: {
     "Oct",
     "Nov",
     "Dec",
-  ];
-  const startDateStamp = new Date(model?.listItem?.startDate);
+  ]
+  const startDateStamp = new Date(model?.listItem?.startDate)
   const startDate =
     monthNames[startDateStamp.getMonth()] +
     " " +
     startDateStamp.getDate() +
     "," +
-    startDateStamp.getFullYear();
+    startDateStamp.getFullYear()
 
-  const endDateStamp = new Date(model?.listItem?.endDate);
+  const endDateStamp = new Date(model?.listItem?.endDate)
   const endDate =
     monthNames[endDateStamp.getMonth()] +
     " " +
     endDateStamp.getDate() +
     "," +
-    endDateStamp.getFullYear();
+    endDateStamp.getFullYear()
 
-  const scorePercent: number = model?.scorePercentage ?? 0;
+  const scorePercent: number = model?.scorePercentage ?? 0
   const goalStatusText: string =
     status === ActivityStatus.Completed
       ? scorePercent < 100
         ? "Goal Incomplete"
         : "Goal Complete"
-      : `${scorePercent.toFixed(0)}%`;
+      : `${scorePercent.toFixed(0)}%`
 
   return reactive(() => {
     // const status: ActivityStatus = model.status;
@@ -896,7 +906,7 @@ export function GoallDetails(p: {
       //activie scree and fundrising
       <>
         <ScrollView>
-          <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <View style={{ justifyContent: "center", height: (windowHeight / 100) * 38, alignItems: "center" }}>
             <View style={styles.activeView}>
               <View style={styles.cardHeadTop}>
                 <View style={styles.imageContainer}>
@@ -932,6 +942,7 @@ export function GoallDetails(p: {
                       {/* <> */}
                       <View
                       // style={styles.isActivity_fundrising}
+                      style={{paddingLeft:"20%"}}
                       >
                         <Text style={styles.isActivity}>
                           {model?.listItem?.name}
@@ -950,7 +961,7 @@ export function GoallDetails(p: {
                             onPress={() => {
                               void App.goalsAndChallenges.openDonationPage(
                                 model
-                              );
+                              )
                             }}
                             style={styles.donateAct}
                           >
@@ -963,10 +974,10 @@ export function GoallDetails(p: {
                     </View>
                   </View>
                   <View
-                  // style={{justifyContent: 'flex-end',alignSelf: 'flex-end',top:90,left:60}}
+                    style={{ position: 'relative' }}
                   >
                     <Text style={styles.dayCount}>
-                      {timeInfo.slice(0, 6)}LEFT
+                      {timeInfo.slice(0, 6)} LEFT
                     </Text>
                   </View>
                 </View>
@@ -979,24 +990,33 @@ export function GoallDetails(p: {
           </View>
 
           <View style={{ justifyContent: "center", alignItems: "center" }}>
-            <View style={styles.detailTabAct}>
+            <View style={styles.detailTabGoal}>
               <Text style={styles.tabTextAct}> {goalStatusText} </Text>
-              <Text style={styles.tabAct}>$65.00</Text>
+              <Text style={styles.tabAct}>
+                {/* $65.00 */}
+                ${model?.fundraising?.goalAmount}
+                </Text>
             </View>
-            <View style={styles.DetailsView}>
-              <Text style={styles.detailsText}>DETAILS</Text>
-              <Text style={styles.detailsAlltext}>GOAL: 108 Miles</Text>
-              <Text style={styles.detailsAlltext}>
-                FUNDRISING GOAL : $250.00
+          </View>
+
+          <View style={{
+            justifyContent: "center", alignItems: "center",
+          }}>
+            <View style={styles.detailTabActNew}>
+              <Text style={styles.DiffText}>DETAILS</Text>
+              <Text style={styles.sameText}>GOAL: 108 Miles</Text>
+              <Text style={styles.sameText}>
+                FUNDRISING GOAL : ${model?.fundraising?.collectedAmount} of ${model?.fundraising?.goalAmount}
               </Text>
-              <Text style={styles.detailsAlltext}>
+              <Text style={styles.sameText}>
                 METRIC: Any :{model?.miles}
               </Text>
-              <Text style={styles.detailsAlltext}>
+              <Text style={styles.sameText}>
                 DURATION: {startDate} - {endDate}
               </Text>
             </View>
           </View>
+
 
           {isJoined && (
             // <View style={styles.card}>
@@ -1027,16 +1047,16 @@ export function GoallDetails(p: {
           )}
         </ScrollView>
       </>
-    );
-  });
+    )
+  })
 }
 
-const LeaderAvatarSize = 50;
-const LeaderResultSize = 30;
-const LeaderAvatarBorderWidth = 3;
-const UserAvatarSize = 40;
-const windowHeight = Dimensions.get("window").height;
-const windowWidth = Dimensions.get("window").width;
+const LeaderAvatarSize = 50
+const LeaderResultSize = 30
+const LeaderAvatarBorderWidth = 3
+const UserAvatarSize = 40
+const windowHeight = Dimensions.get("window").height
+const windowWidth = Dimensions.get("window").width
 export const styles = StyleSheet.create({
   // used in ChallengeDetails
   screen: {
@@ -1096,7 +1116,7 @@ export const styles = StyleSheet.create({
   cardHeadTop: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
   },
   pastGoalCompletionStatus: {
     backgroundColor: LightBlueColor,
@@ -1218,7 +1238,8 @@ export const styles = StyleSheet.create({
     overflow: "hidden",
     // marginRight: 30,
     justifyContent: "center",
-    alignItems: "center",
+    // alignItems: "center",
+    // paddingTop:30
   },
   activity: {
     color: "#0B82DC",
@@ -1227,13 +1248,14 @@ export const styles = StyleSheet.create({
     textShadowColor: "rgba(0,0,0,0.5)",
     textShadowOffset: { width: -1, height: -1 },
     textShadowRadius: 5,
-    shadowColor: "#000",    
+    shadowColor: "#000",
     marginLeft: 45,
   },
   dayCount: {
     color: "#0B82DC",
-    fontSize: 44,
+    fontSize:44,
     fontWeight: "800",
+    paddingLeft:"10%",
     // textTransform: "uppercase",
     // transform: [{ rotate: "270deg" }],
     textShadowColor: "rgba(0,0,0,0.5)",
@@ -1245,7 +1267,7 @@ export const styles = StyleSheet.create({
   tabTextAct: {
     color: "#0B82DC",
     fontSize: 40,
-    fontWeight: "800",
+    fontWeight: "500",
   },
   tabAct: {
     color: "#0B82DC",
@@ -1310,10 +1332,11 @@ export const styles = StyleSheet.create({
   },
   donateAct: {
     backgroundColor: "#03F6F0",
-    left: 0,
+    left: -4,
     width: 120,
-    top: 10,
-    height: 34,
+    top: 15,
+    // height: 34,
+    padding:5,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
@@ -1638,8 +1661,8 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     width: 120,
-    padding: 8,
-    marginTop: 10,
+    padding: 5,
+    marginTop: 15,
     borderRadius: 8,
     borderBottomWidth: 1,
     borderColor: GrayColor,
@@ -1658,7 +1681,7 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     color: "#0E83DB",
   },
-  detailTabAct: {
+  detailTabGoal: {
     backgroundColor: "#f7f7f7",
     width: "85%",
     // height: 50,
@@ -1671,7 +1694,33 @@ export const styles = StyleSheet.create({
     shadowRadius: 5.65,
     elevation: 7,
     borderRadius: 8,
-    marginBottom: 8,
-    paddingVertical:8,
+    marginBottom: 5,
   },
-});
+  detailTabActNew: {
+    backgroundColor: "#f7f7f7",
+    width: "85%",
+    // height: 50,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 5.65,
+    elevation: 7,
+    borderRadius: 8,
+    marginBottom: 5,
+    padding: 5,
+  },
+  sameText: {
+    color: "#707070",
+    paddingVertical: 2
+  },
+  DiffText: {
+    color: "#0B82DC",
+    fontWeight: "500",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
+    shadowColor: "#fff",
+  }
+})

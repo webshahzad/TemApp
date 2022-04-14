@@ -95,7 +95,7 @@ const GoalsAndChallenges = (
   return reactive(() => {
     return (
       <SafeAreaView style={styles.container}>
-        {/* <ScrollView> */}
+        <ScrollView>
         <View>
           <ChatHeader rightIcon="cross" isChildren rightOnPress={()=> navigation.navigate("Main")}>
           <View style={styles.filters}>
@@ -253,7 +253,7 @@ const GoalsAndChallenges = (
             ></CircularProgress>
           </TouchableOpacity>
         </View>
-        {/* </ScrollView> */}
+        </ScrollView>
       </SafeAreaView>
     );
   });
