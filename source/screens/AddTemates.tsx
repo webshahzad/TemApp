@@ -12,6 +12,8 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  ImageBackground,
+  Dimensions,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ref } from "reactronic";
@@ -29,30 +31,38 @@ import { ChatRoom } from "models/data/ChatRoom";
 import CircularProgress from "components/CircularProgress";
 import arrow from "assets/images/arrow.png";
 import { useNavigation } from "@react-navigation/native";
+import added from "assets/icons-jan/completeimageset/complete1.png";
+import add from "assets/icons-jan/syncimageset/sync1.png";
 
 export const AddTemates = (
   p: StackScreenProps<RootStackPropsPerPath, "AddTemates">
 ): React.ReactElement => {
   const manager = App.addTemates;
   const navigation = useNavigation();
+  const windowWidth = Dimensions.get("window").width;
   useEffect(() => {
     p.navigation.setOptions({
       // headerLeft:false,
       title: "",
       headerStyle: { backgroundColor: "#3E3E3E" },
       headerLeft: (props) => (
-        <View style={{ display: "flex", flexDirection: "row", width: "100%" }}>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+                      
+          }}
+        >
           <Pressable
             onPress={() => {
               navigation.goBack();
             }}
-            style={{ width: "150%" }}
+            style={{ width: (windowWidth/100)*40 }}
           >
             <Image style={{ marginLeft: 10 }} source={arrow} />
           </Pressable>
           <View
             style={{
-              width: "100%",
               justifyContent: "center",
               alignSelf: "center",
             }}
@@ -105,7 +115,6 @@ export const AddTemates = (
       manager.showTems && manager.showPublicTems && publicTems.items.length > 0;
     const showTemates = manager.showUsers && temates.items.length > 0;
     const hasContent = showTems || showPublicTems || showTemates;
-
 
     return (
       <SafeAreaView style={styles.screen}>
@@ -290,46 +299,43 @@ function TemateRow(
         {user.first_name} {user.last_name}
       </Text>
       {isUserSelected || disabled ? (
-        // <Icon name='check' color={MainBlueColor} size={20} />
-        <View style={styles.hexagon}>
-          <View style={styles.hexagonInner}>
-            <Text
-              style={{
-                fontSize: 9,
-                color: "black",
-                fontWeight: "bold",
-                textShadowColor: "rgba(0,0,0,0.5)",
-                textShadowOffset: { width: -1, height: -1 },
-                textShadowRadius: 5,
-                shadowColor: "#fff",
-              }}
-            >
-              ADDED
-            </Text>
-          </View>
-          <View style={styles.hexagonBefore} />
-          <View style={styles.hexagonAfter} />
-        </View>
+        <ImageBackground source={added} style={{ width: 50, height: 50 }}>
+          <Text
+            style={{
+              fontSize: 9,
+              color: "black",
+              fontWeight: "bold",
+              textShadowColor: "rgba(0,0,0,0.5)",
+              textShadowOffset: { width: -1, height: -1 },
+              textShadowRadius: 5,
+              shadowColor: "#fff",
+              justifyContent: 'center',
+              alignSelf:'center',
+              marginTop:18,
+            }}
+          >
+            ADDED
+          </Text>
+        </ImageBackground>
       ) : (
-        <View style={styles.hexagon1}>
-          <View style={styles.hexagonInner1}>
-            <Text
-              style={{
-                fontSize: 9,
-                color: "#fff",
-                fontWeight: "bold",
-                textShadowColor: "rgba(0,0,0,0.5)",
-                textShadowOffset: { width: -1, height: -1 },
-                textShadowRadius: 5,
-                shadowColor: "#fff",
-              }}
-            >
-              + ADD
-            </Text>
-          </View>
-          <View style={styles.hexagonBefore1} />
-          <View style={styles.hexagonAfter1} />
-        </View>
+            <ImageBackground source={add} style={{ width: 50, height: 50}}>
+          <Text
+            style={{
+              fontSize: 9,
+              color: "black",
+              fontWeight: "bold",
+              textShadowColor: "rgba(0,0,0,0.5)",
+              textShadowOffset: { width: -1, height: -1 },
+              textShadowRadius: 5,
+              shadowColor: "#fff",
+              justifyContent: 'center',
+              alignSelf:'center',
+              marginTop:18,
+            }}
+          >
+            + ADD
+          </Text>
+        </ImageBackground>
       )}
     </View>
   );

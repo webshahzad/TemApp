@@ -65,9 +65,6 @@ export const GoalsAndChallengesList = (
   const list = p.list;
   const listss = p.listss;
 
-
-  
-  
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
   // const windowHeight = Dimensions.get("window").height;

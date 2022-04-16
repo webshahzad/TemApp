@@ -281,7 +281,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginTop:40
+    marginTop:40,
+    marginBottom:40
   },
   policyText: {
     color: "#FFFFFF",

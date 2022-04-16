@@ -59,7 +59,6 @@ const data = [
     description: "Watch Video",
     screenName: "chat",
     alertMsg: 'Comming Soon!'
-  
   },
    {
     id: 5,

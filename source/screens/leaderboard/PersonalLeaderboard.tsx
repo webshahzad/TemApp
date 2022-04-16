@@ -163,7 +163,8 @@ export function PersonalLeaderList(p: {}): JSX.Element {
                   <Avatar
                     source={user.profile_pic}
                     size={UserAvatarSize}
-                    style={styles.userAvatar}
+                    style={{marginLeft:2}}
+                    // style={styles.userAvatar}
                   />
                 )}
                 <Text style={styles.userName} numberOfLines={1}>
@@ -507,7 +508,7 @@ const styles = StyleSheet.create({
     paddingRight: 5,
   },
   userAvatar: {
-    // marginRight: 0,
+    // marginRight:,
   },
   temateInfo: {
     flex: 1,
@@ -517,7 +518,7 @@ const styles = StyleSheet.create({
     // fontWeight: 'bold',
     fontSize: 8,
     marginTop: 2,
-    marginLeft: 1,
+    marginLeft: 2,
 
   },
   location: {
@@ -547,6 +548,5 @@ const styles = StyleSheet.create({
     shadowColor: "black",
     fontWeight: "600",
     fontSize: 12,
-
   },
 })

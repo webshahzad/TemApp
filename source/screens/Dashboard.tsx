@@ -49,10 +49,9 @@ export function Dashboard(
     setScreenNAme(screen)
     setChangeText(label);
     setIndexNumber(index)
-
   };
   return (
-    <HomeContainer   slider hexagonText={changeText} screenName={screenNAme} indexNumber={indexNumber} >
+    <HomeContainer slider hexagonText={changeText} screenName={screenNAme} indexNumber={indexNumber} >
       <SwiperComp onChangeLabel={onChangeLabel}>
         <MyHealth />
         <MySchedule />

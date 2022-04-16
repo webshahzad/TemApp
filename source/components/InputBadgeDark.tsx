@@ -3,7 +3,7 @@
 // Proprietary and Confidential. All rights reserved. //
 //----------------------------------------------------//
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef } from "react"
 import {
   StyleSheet,
   ViewStyle,
@@ -12,41 +12,41 @@ import {
   Pressable,
   View,
   Text,
-} from "react-native";
-import { Transaction, Ref } from "reactronic";
-import Icon from "react-native-vector-icons/MaterialIcons";
+} from "react-native"
+import { Transaction, Ref } from "reactronic"
+import Icon from "react-native-vector-icons/MaterialIcons"
 
-import { reactive } from "common/reactive";
-import { BadgeProps, isTrue, Badge } from "./Badge";
-import { Focus } from "common/Focus";
-import { DangerColor } from "./Theme";
+import { reactive } from "common/reactive"
+import { BadgeProps, isTrue, Badge } from "./Badge"
+import { Focus } from "common/Focus"
+import { DangerColor } from "./Theme"
 
 export interface InputBadgeButton {
-  icon: string;
-  onPress: () => void;
-  color: string;
-  size?: number;
+  icon: string
+  onPress: () => void
+  color: string
+  size?: number
 }
 
 export interface InputBadgeProps extends Omit<BadgeProps, "selected"> {
-  model?: Ref<string | number | undefined>;
-  Value?: any;
-  defaultValue?: any;
-  placeholder?: string;
-  secured?: boolean;
-  multiline?: boolean;
-  autoCapitalize?: "none" | "sentences" | "words" | "characters";
-  keyboardType?: KeyboardTypeOptions;
-  buttons?: InputBadgeButton[];
-  clearButton?: boolean;
-  inputTop?: number;
-  error?: string;
-  onFocus?: (event: any) => void;
+  model?: Ref<string | number | undefined>
+  Value?: any
+  defaultValue?: any
+  placeholder?: string
+  secured?: boolean
+  multiline?: boolean
+  autoCapitalize?: "none" | "sentences" | "words" | "characters"
+  keyboardType?: KeyboardTypeOptions
+  buttons?: InputBadgeButton[]
+  clearButton?: boolean
+  inputTop?: number
+  error?: string
+  onFocus?: (event: any) => void
 }
 
 export function InputBadgeDark(p: InputBadgeProps): JSX.Element {
-  const [inputFocus] = React.useState(() => Transaction.run(() => new Focus()));
-  const focusRef = Ref.to(inputFocus);
+  const [inputFocus] = React.useState(() => Transaction.run(() => new Focus()))
+  const focusRef = Ref.to(inputFocus)
   return reactive(() => {
     return (
       <Badge {...p} selected={focusRef.focused}>
@@ -78,8 +78,8 @@ export function InputBadgeDark(p: InputBadgeProps): JSX.Element {
         </View>
         {/* <ClearButton {...p} /> */}
       </Badge>
-    );
-  });
+    )
+  })
 }
 
 function ClearButton(p: InputBadgeProps): JSX.Element {
@@ -87,7 +87,7 @@ function ClearButton(p: InputBadgeProps): JSX.Element {
     const showClearButton =
       p.clearButton === true &&
       p.model?.value !== undefined &&
-      p.model.value !== "";
+      p.model.value !== ""
     return (
       <>
         {showClearButton && (
@@ -99,19 +99,19 @@ function ClearButton(p: InputBadgeProps): JSX.Element {
           </Pressable>
         )}
       </>
-    );
-  });
+    )
+  })
 }
 
 function InputBadgeValue(
   p: InputBadgeProps & { inputFocus: Focus }
 ): JSX.Element {
   return reactive(() => {
-    const readonly = p.editable !== undefined ? !isTrue(p.editable) : false;
+    const readonly = p.editable !== undefined ? !isTrue(p.editable) : false
     // let defaultValue = readonly ? undefined : p.model?.value
-    let defaultValue = p.model?.value;
+    let defaultValue = p.model?.value
     if (typeof defaultValue === "number") {
-      defaultValue = defaultValue.toString();
+      defaultValue = defaultValue.toString()
     }
     return (
       <TextInput
@@ -133,19 +133,19 @@ function InputBadgeValue(
         keyboardType={p.keyboardType}
         onChangeText={(value) => {
           Transaction.run(() => {
-            if (p.model) p.model.value = value;
-          });
+            if (p.model) p.model.value = value
+          })
         }}
         onFocus={p.onFocus}
         // onFocus={() => {
         //   p.inputFocus.setFocused(true);
         // }}
         onBlur={() => {
-          p.inputFocus.setFocused(false);
+          p.inputFocus.setFocused(false)
         }}
       />
-    );
-  });
+    )
+  })
 }
 
 const styles = StyleSheet.create({
@@ -177,8 +177,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.58,
     shadowRadius: 8.0,
     elevation: 2,
-    marginTop:10,
-    marginBottom:5,
+    marginTop: 10,
+    marginBottom: 5,
   } as ViewStyle,
 
   multiline: {
@@ -199,4 +199,4 @@ const styles = StyleSheet.create({
     fontSize: 12,
     paddingLeft: 50,
   },
-});
+})

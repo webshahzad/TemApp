@@ -86,7 +86,8 @@ const styles = StyleSheet.create({
   title: {
     color: "#0B82DC",
     width: "93%",
-    paddingLeft: 30,
-    marginTop:10
+    paddingLeft: 35,
+    marginTop:10,
+    paddingBottom:15,
   },
 });

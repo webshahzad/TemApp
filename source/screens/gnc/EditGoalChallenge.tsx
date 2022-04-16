@@ -3,9 +3,9 @@
 // Proprietary and Confidential. All rights reserved. //
 //----------------------------------------------------//
 
-import React, { useEffect, useState } from "react"
-import { Transaction, Ref } from "reactronic"
-import { reactive } from "common/reactive"
+import React, { useEffect, useState } from "react";
+import { Transaction, Ref } from "reactronic";
+import { reactive } from "common/reactive";
 import {
   Text,
   View,
@@ -18,16 +18,16 @@ import {
   TouchableOpacity,
   Modal,
   Dimensions,
-} from "react-native"
-import { SafeAreaView } from "react-native-safe-area-context"
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import {
   createStackNavigator,
   StackScreenProps,
-} from "@react-navigation/stack"
-import ChallengMetric from "./ChallengMetric"
-import { EmptyProps, RootStackPropsPerPath } from "navigation/params"
-import { App } from "models/app/App"
-import { GoalChallengeDetailsModel } from "models/data/GoalChallengeDetailsModel"
+} from "@react-navigation/stack";
+import ChallengMetric from "./ChallengMetric";
+import { EmptyProps, RootStackPropsPerPath } from "navigation/params";
+import { App } from "models/app/App";
+import { GoalChallengeDetailsModel } from "models/data/GoalChallengeDetailsModel";
 import {
   ActivitySelectionValues,
   ChallengeType,
@@ -37,37 +37,37 @@ import {
   getActivityTypeName,
   getFundsDestinationText,
   typeList,
-} from "models/data/GoalOrChallenge"
-import { InputBadge } from "components/InputBadge"
-import { PickerBadge } from "components/PickerBadge"
-import { PickerManager } from "models/app/PickerManager"
-import { Checkbox } from "components/Checkbox"
-import { DatePicker } from "components/DatePicker"
-import { DatePickerManager } from "models/app/DatePickerManager"
-import { RoundButton } from "components/RoundButton"
-import { DangerColor, MainBlueColor } from "components/Theme"
-import { doAsync } from "common/doAsync"
-import { Bool } from "common/constants"
-import { HexagonTargetSelector } from "./HexagonTargetSelector"
-import { PressableBadge } from "components/PressableBadge"
-import { ActivityType } from "models/data/GoalOrChallenge"
-import { formatShortDate } from "common/datetime"
-import ActivityImage from "assets/icons/act/act.png"
-import { MultiplePickerBadge } from "components/MultiplePickerBadge"
-import { ActivityData } from "models/data/Activity"
-import Icon from "react-native-vector-icons/FontAwesome5"
-import { DatePickerLight } from "components/DatePikerLight"
-import CircularProgress from "components/CircularProgress"
-import Dummy from "assets/images/user-dummy.png"
-import CheckBoxComp from "components/CheckBoxComp"
-import { ChatHeader } from "components/Header"
-import { DrawerActions, useIsFocused, useNavigation } from "@react-navigation/native"
+} from "models/data/GoalOrChallenge";
+import { InputBadge } from "components/InputBadge";
+import { PickerBadge } from "components/PickerBadge";
+import { PickerManager } from "models/app/PickerManager";
+import { Checkbox } from "components/Checkbox";
+import { DatePicker } from "components/DatePicker";
+import { DatePickerManager } from "models/app/DatePickerManager";
+import { RoundButton } from "components/RoundButton";
+import { DangerColor, MainBlueColor } from "components/Theme";
+import { doAsync } from "common/doAsync";
+import { Bool } from "common/constants";
+import { HexagonTargetSelector } from "./HexagonTargetSelector";
+import { PressableBadge } from "components/PressableBadge";
+import { ActivityType } from "models/data/GoalOrChallenge";
+import { formatShortDate } from "common/datetime";
+import ActivityImage from "assets/icons/act/act.png";
+import { MultiplePickerBadge } from "components/MultiplePickerBadge";
+import { ActivityData } from "models/data/Activity";
+import Icon from "react-native-vector-icons/FontAwesome5";
+import { DatePickerLight } from "components/DatePikerLight";
+import CircularProgress from "components/CircularProgress";
+import Dummy from "assets/images/user-dummy.png";
+import CheckBoxComp from "components/CheckBoxComp";
+import { ChatHeader } from "components/Header";
+import { DrawerActions, useIsFocused, useNavigation } from "@react-navigation/native";
 import {
   createDrawerNavigator,
   DrawerScreenProps,
-} from "@react-navigation/drawer"
-import { GoalsAndChallengesSideMenu } from "./GoalsAndChallengesSideMenu"
-import { GoalsAndChallengesMatricSideMenu } from "./GoalsAndChallengesMatricSideMenu"
+} from "@react-navigation/drawer";
+import { GoalsAndChallengesSideMenu } from "./GoalsAndChallengesSideMenu";
+import { GoalsAndChallengesMatricSideMenu } from "./GoalsAndChallengesMatricSideMenu";
 import { Value } from 'react-native-reanimated'
 import { TimeManager } from 'models/app/Calendar/TimeManager'
 import { InputModalManager } from 'components/InputModal'
@@ -117,14 +117,14 @@ import { InputModalManager } from 'components/InputModal'
 //   p: StackScreenProps<LocalStackPropsPerPath, "LocalScreen">
 
 type LocalDrawerPropsPerPath = {
-  LocalStack: EmptyProps
-}
+  LocalStack: EmptyProps;
+};
 
-const Drawer = createDrawerNavigator<LocalDrawerPropsPerPath>()
+const Drawer = createDrawerNavigator<LocalDrawerPropsPerPath>();
 
 type LocalStackPropsPerPath = {
-  Local: EmptyProps
-}
+  Local: EmptyProps;
+};
 
 export function GoalsAndChallengesWithSideMenu(
   p: StackScreenProps<RootStackPropsPerPath, "GoalsAndChallenges">
@@ -141,10 +141,10 @@ export function GoalsAndChallengesWithSideMenu(
         options={{ swipeEnabled: true }}
       />
     </Drawer.Navigator>
-  )
+  );
 }
 
-const Stack = createStackNavigator<LocalStackPropsPerPath>()
+const Stack = createStackNavigator<LocalStackPropsPerPath>();
 
 function LocalStack(
   p: DrawerScreenProps<LocalDrawerPropsPerPath, "LocalStack">
@@ -157,7 +157,7 @@ function LocalStack(
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
-  )
+  );
 }
 
 export function EditGoalChallenge1(p: any): JSX.Element {
@@ -173,44 +173,44 @@ export function EditGoalChallenge1(p: any): JSX.Element {
         options={{ swipeEnabled: true }}
       />
     </Drawer.Navigator>
-  )
+  );
 }
 
 
-export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'EditGoalChallenge'>): JSX.Element {
-  const model = p.route.params.model
-  const gncType = model.gncType
-  const activityTypeName = getActivityTypeName(gncType)
-  const isChallenge: boolean = gncType === ActivityType.Challenge
-  const isNew: boolean = p.route.params.isNew
-  const createGroup = App.social.createGroup
-  const isFocused = useIsFocused()
-  const u = Ref.to(App.user)
-  const valueMetric = App.user.valueMetric
+export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath,  'EditGoalChallenge'>): JSX.Element {
+  const model = p.route.params.model;
+  const gncType = model.gncType;
+  const activityTypeName = getActivityTypeName(gncType);
+  const isChallenge: boolean = gncType === ActivityType.Challenge;
+  const isNew: boolean = p.route.params.isNew;
+  const createGroup = App.social.createGroup;
+  const isFocused = useIsFocused();
+  const u = Ref.to(App.user);
+  const valueMetric = App.user.valueMetric; 
 
-
+ 
   useEffect(() => {
     p.navigation.setOptions({
       title: (isNew ? "Create" : "Edit") + " " + activityTypeName,
-    })
-  })
-  const manager = App.goalsAndChallenges
+    });
+  });
+  const manager = App.goalsAndChallenges;
   useEffect(() => {
-    void manager.currentTabList.loadItems()
-  }, [])
-  const fundraisingRef = Ref.to(model.fundraisingShadow)
-  const modelRef = Ref.to(model)
+    void manager.currentTabList.loadItems();
+  }, []);
+  const fundraisingRef = Ref.to(model.fundraisingShadow);
+  const modelRef = Ref.to(model);
 
-  console.log("modelRef,modelRef", modelRef)
-  const navigation = useNavigation()
+console.log("modelRef,modelRef",modelRef)
+const navigation = useNavigation();
 
-  useEffect(() => {
-    Transaction.run(() => {
-      App.user.startDate = ""
-      createGroup.imageUri = undefined
-      u.goalStartDate = false
+  useEffect(()=>{
+    Transaction.run(()=>{
+     App.user.startDate= "" 
+     createGroup.imageUri= undefined
+     u.goalStartDate=false
     })
-  }, [navigation.goBack])
+   },[navigation.goBack])
 
 
   const [startDateManager] = useState(() =>
@@ -222,59 +222,59 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
           format: formatShortDate,
         })
     )
-  )
+  );
   const [durationPickerManager] = useState(() =>
     Transaction.run(() => new PickerManager(DurationList, modelRef.duration))
-  )
+  );
   const [typePickerManager] = useState(() =>
     Transaction.run(() => new PickerManager(typeList, modelRef.type))
-  )
+  );
   const [activitySelectionManager] = useState(() =>
     Transaction.run(
       () => new PickerManager(ActivitySelectionValues, modelRef.anyActivity)
     )
-  )
+  );
   const [fundsDestinationPickerManager] = useState(() =>
     Transaction.run(
       () => new PickerManager(FundsDestinationList, fundraisingRef.destination)
     )
-  )
+  );
 
   return reactive(() => {
     // Validation
-    const showInvalidName = model.isInvalid && !model.hasValidName
-    const showInvalidDescription = model.isInvalid && !model.hasValidDescription
-    const showInvalidStartDate = model.isInvalid && !model.hasValidStartDate
-    const showInvalidDuration = model.isInvalid && !model.hasValidDuration
-    const showInvalidActivity = model.isInvalid && !model.hasValidActivities
-    const showInvalidTemates = model.isInvalid && !model.hasValidMembers
-    const showInvalidTem1 = model.isInvalid && !model.hasValidTem1
+    const showInvalidName = model.isInvalid && !model.hasValidName;
+    const showInvalidDescription = model.isInvalid && !model.hasValidDescription;
+    const showInvalidStartDate = model.isInvalid && !model.hasValidStartDate;
+    const showInvalidDuration = model.isInvalid && !model.hasValidDuration;
+    const showInvalidActivity = model.isInvalid && !model.hasValidActivities;
+    const showInvalidTemates = model.isInvalid && !model.hasValidMembers;
+    const showInvalidTem1 = model.isInvalid && !model.hasValidTem1;
     const showInvalidTem2 =
-      model.isInvalid && !(model.hasValidTem2 && model.hasValidTemsPair)
+      model.isInvalid && !(model.hasValidTem2 && model.hasValidTemsPair);
     const showInvalidFundsDestination =
-      model.isInvalid && !model.hasValidFundsDestination
+      model.isInvalid && !model.hasValidFundsDestination;
     const showInvalidFundsAmount =
-      model.isInvalid && !model.hasValidFundsAmount
-    const createChallenge = model
+      model.isInvalid && !model.hasValidFundsAmount;
+    const createChallenge = model;
 
-
+   
 
     // const startDate =  App.user.startDate;
-
-    const navigation = useNavigation()
-    const renderItem = (id: number): any => {
+   
+    const navigation = useNavigation();
+    const renderItem = (id:number): any => {
       if (id == 1) {
-        return "individual vs individual"
+        return "individual vs individual";
       } else if (id == 2) {
-        return "individual vs tem"
+        return "individual vs tem";
       } else if (id == 3) {
-        return "tem vs tem"
+        return "tem vs tem";
       }
-    }
+    };
 
     return (
       <SafeAreaView style={styles.screen}>
-        <ChatHeader rightIcon="cross" rightOnPress={() => navigation.navigate("GoalsAndChallenges")} />
+        <ChatHeader rightIcon="cross" rightOnPress={()=> navigation.navigate("GoalsAndChallenges")}/>
         <ScrollView contentContainerStyle={styles.container}>
           <View style={{ justifyContent: "center", alignItems: "center" }}>
             <Text style={styles.goaltext}>
@@ -310,7 +310,7 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
           {isChallenge && (
             <>
               <View style={styles.inputfirst}>
-                <View style={[styles.input, { marginBottom: 20 }]}>
+                <View style={[styles.input,{marginBottom:20}]}>
                   <PickerBadge
                     pressableAreaStyle={styles.pressbleinput}
                     manager={typePickerManager}
@@ -335,7 +335,7 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
                           padding: 15,
                           backgroundColor: "white",
                           fontSize: 12,
-                          textAlign: "center",
+                          textAlign:"center",
                           fontWeight: "500",
                           color: "#3e3e3e",
                           borderBottomColor: "lightgray",
@@ -346,7 +346,7 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
                       </Text>
                     )}
                     renderSelectedItem={(item) => {
-
+                     
                       return (
                         <Text
                           style={{
@@ -360,7 +360,7 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
                         >
                           {renderItem(item)}
                         </Text>
-                      )
+                      );
                     }}
                   />
                   <CheckBoxComp
@@ -386,7 +386,7 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
               placeholder="Name"
               model={modelRef.name}
               onBlur={() => App.user.challengeNameCheck(modelRef.name)}
-              contentStyle={{ width: "91%", marginLeft: 10, marginRight: 5 }}
+              contentStyle={{ width: "91%" ,marginLeft: 10,marginRight:5 }}
             />
             <CheckBoxComp
               model={u.challengeName}
@@ -423,15 +423,15 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
               shadow="#979797"
               customCheckBox
               right={30}
-            />
-            <Text
-              style={[
-                styles.validationMessage,
-                { color: showInvalidDescription ? DangerColor : "transparent" },
-              ]}
-            >
-              Please select description
-            </Text>
+            /> 
+             <Text
+            style={[
+              styles.validationMessage,
+              { color: showInvalidDescription? DangerColor : "transparent" },
+            ]}
+          >
+            Please select description
+          </Text>
           </View>
           <Text
             style={[
@@ -451,12 +451,12 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
                   onDateChange={(date: any) => {
                     Transaction.run(() => {
                       App.user.startDate = date
-                      u.goalStartDate = true
-                    })
+                      u.goalStartDate=true
+                    });
                   }}
                   minimumDate={new Date()}
                   editable={isNew}
-
+                  
                 />
               </View>
               <View style={{ position: "absolute", right: -40 }}>
@@ -534,11 +534,11 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
                     >
                       {item}
                     </Text>
-                  )
+                  );
                 }}
               />
               <CheckBoxComp
-                model={modelRef.durationCheck}
+               model={modelRef.durationCheck}
                 background="#f7f7f7"
                 shadow="#979797"
                 customCheckBox
@@ -593,7 +593,7 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
                     >
                       {getActivitySelectionText(item)}
                     </Text>
-                  )
+                  );
                 }}
               />
               <CheckBoxComp
@@ -633,11 +633,11 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
                     model={modelRef.activityPickerValues}
                     doBeforeOpen={async (manager) => {
                       if (App.activityManager.needToLoadActivityListForGoals) {
-                        await App.activityManager.loadActivityListForGoals()
+                        await App.activityManager.loadActivityListForGoals();
                       }
                       manager.setOptions(
                         App.activityManager.activityListForGoals
-                      )
+                      );
                     }}
                     renderEmptyPicker={() => (
                       <Text
@@ -704,12 +704,12 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
                         >
                           {items.map((item) => item.name).join(", ")}
                         </Text>
-                      )
+                      );
                     }}
                     getKey={(item) => item.id.toString()}
                   />
                   <CheckBoxComp
-                    model={modelRef.goalActivitySelectionCheck}
+                   model={modelRef.goalActivitySelectionCheck}
                     background="#f7f7f7"
                     shadow="#979797"
                     customCheckBox
@@ -743,7 +743,7 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
                           selectedTemRef: modelRef.tem1,
                           showPublicTems:
                             App.user.stored.isCompanyAccount === Bool.True,
-                        })
+                        });
                       })
                     }
                     text={modelRef.tem1String}
@@ -770,14 +770,14 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
               <View style={styles.inputfirst}>
                 <View style={styles.input}>
                   <PressableBadge
-                    placeholder='Temates 2'
+                   placeholder='Temates 2'
                     pressableAreaStyle={styles.pressbleinput}
                     onPress={() =>
                       doAsync(async () => {
                         await App.addTemates.open({
                           selectedTemRef: modelRef.tem2,
                           showPublicTems: true,
-                        })
+                        });
                       })
                     }
                     text={modelRef.tem2String}
@@ -808,7 +808,7 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
             <View style={styles.inputfirst}>
               <View style={styles.input}>
                 <PressableBadge
-                  placeholder='Temates'
+                 placeholder='Temates'
                   pressableAreaStyle={styles.pressbleinput}
                   textDefaultStyle={styles.textdefault}
                   // label='Tēmates'
@@ -819,11 +819,11 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
                       await App.addTemates.open({
                         tematesToAddRef: modelRef.temates,
                         selectedTemRef: modelRef.groupDetail,
-                      })
+                      });
                     })
                   }
                   text={modelRef.tematesString}
-                  textStyle={{ position: "absolute", left: 10, top: 5, }}
+                  textStyle={{ position: "absolute", left: 10, top: 5,}}
                 />
                 <CheckBoxComp
                   model={modelRef.challengeTematesChec}
@@ -846,74 +846,74 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
               </Text>
             </View>
           )}
-          {isChallenge ?
-            <View style={styles.inputfirst}>
-              <View style={styles.input}>
-                <PressableBadge
-                  // onPress={() => {
-                  //   Transaction.run(() => (App.user.metricDrawer = true));
-                  // }}                 
-                  pressableAreaStyle={styles.pressbleinput}
-                  placeholder='Metrics'
-                  // icon={TematesImage}
-                  labelBackgroundColor="white"
-                  text={modelRef.matric}
-
-                  textStyle={{ color: '#000', position: 'absolute', left: 13, top: 5 }}
-
-                />
-                <CheckBoxComp
-                  model={u.goalMatric}
-                  background="#f7f7f7"
-                  shadow="#979797"
-                  customCheckBox
-                />
-              </View>
-              <Text
-                style={[
-                  styles.validationMessage,
-                  { color: showInvalidTemates ? DangerColor : "transparent" },
-                ]}
-              >
-                {isChallenge && model.type === ChallengeType.UserVsTeam
-                  ? "Please select a Tēm for challenge"
-                  : "Please select at least one tēmate"}
-              </Text>
+         { isChallenge ?
+          <View style={styles.inputfirst}>
+            <View style={styles.input}>
+              <PressableBadge
+                // onPress={() => {
+                //   Transaction.run(() => (App.user.metricDrawer = true));
+                // }}                 
+                pressableAreaStyle={styles.pressbleinput}
+                placeholder='Metrics'
+                // icon={TematesImage}
+                labelBackgroundColor="white"
+                text={modelRef.matric}
+                
+                textStyle={{color: '#000',position:'absolute',left: 13,top:5}}
+              
+              />
+              <CheckBoxComp
+                model={u.goalMatric}
+                background="#f7f7f7"
+                shadow="#979797"
+                customCheckBox
+              />
             </View>
-            :
-            <View style={styles.inputfirst}>
-              <View style={styles.input}>
-                <PressableBadge
-                  onPress={() => {
-                    Transaction.run(() => (App.user.metricDrawer = true))
-                  }}
-                  pressableAreaStyle={styles.pressbleinput}
-                  placeholder={`Matric`}
-                  // icon={TematesImage}
-                  labelBackgroundColor="white"
-
-                  text={modelRef.targetValue}
-                  textStyle={{ color: '#000', position: 'absolute', left: 13, top: 5 }}
-
-                />
-                <CheckBoxComp
-                  model={u.goalMatric}
-                  background="#f7f7f7"
-                  shadow="#979797"
-                  customCheckBox
-                />
-              </View>
-              <Text
-                style={[
-                  styles.validationMessage,
-                  { color: showInvalidTemates ? DangerColor : "transparent" },
-                ]}
-              >
-                {isChallenge && model.type === ChallengeType.UserVsTeam
-                  ? "Please select a Tēm for challenge"
-                  : "Please select at least one tēmate"}
-              </Text>
-            </View>}
+            <Text
+              style={[
+                styles.validationMessage,
+                { color: showInvalidTemates ? DangerColor : "transparent" },
+              ]}
+            >
+              {isChallenge && model.type === ChallengeType.UserVsTeam
+                ? "Please select a Tēm for challenge"
+                : "Please select at least one tēmate"}
+            </Text>
+          </View> 
+          : 
+          <View style={styles.inputfirst}>
+            <View style={styles.input}>
+              <PressableBadge
+                // onPress={() => {
+                //   Transaction.run(() => (App.user.metricDrawer = true));
+                // }}                 
+                pressableAreaStyle={styles.pressbleinput}
+                placeholder={`Matric`}
+                // icon={TematesImage}
+                labelBackgroundColor="white"  
+              
+                text={modelRef.targetValue}
+                textStyle={{color: '#000',position:'absolute',left: 13,top:5}}
+              
+              />
+              <CheckBoxComp
+                model={u.goalMatric}
+                background="#f7f7f7"
+                shadow="#979797"
+                customCheckBox
+              />
+            </View>
+            <Text
+              style={[
+                styles.validationMessage,
+                { color: showInvalidTemates ? DangerColor : "transparent" },
+              ]}
+            >
+              {isChallenge && model.type === ChallengeType.UserVsTeam
+                ? "Please select a Tēm for challenge"
+                : "Please select at least one tēmate"}
+            </Text>
+          </View>}
           {App.user.stored.isCompanyAccount == Bool.True && (
             <View style={styles.switchContainer}>
               <View>
@@ -962,11 +962,11 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
               onPress={() => {
                 Transaction.run(() => {
                   // model.challengePrivacy= "private";
-                  createChallenge.visibility = "private"
-                  App.user.private = true
-                  App.user.temates = false
-                  App.user.public = false
-                })
+                  createChallenge.visibility = "private";
+                  App.user.private = true;
+                  App.user.temates = false;
+                  App.user.public = false;
+                });
               }}
               style={{ flexDirection: "column" }}
             >
@@ -982,11 +982,11 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
             <TouchableOpacity
               onPress={() => {
                 Transaction.run(() => {
-                  createChallenge.visibility = "temates"
-                  App.user.private = false
-                  App.user.temates = true
-                  App.user.public = false
-                })
+                  createChallenge.visibility = "temates";
+                  App.user.private = false;
+                  App.user.temates = true;
+                  App.user.public = false;
+                });
               }}
               style={{ flexDirection: "column" }}
             >
@@ -1002,11 +1002,11 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
             <TouchableOpacity
               onPress={() => {
                 Transaction.run(() => {
-                  createChallenge.visibility = "public"
-                  App.user.private = false
-                  App.user.temates = false
-                  App.user.public = true
-                })
+                  createChallenge.visibility = "public";
+                  App.user.private = false;
+                  App.user.temates = false;
+                  App.user.public = true;
+                });
               }}
               style={{ flexDirection: "column" }}
             >
@@ -1067,11 +1067,11 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
                         style={{
                           flex: 1,
                           // paddingVertical: 10,
-                          position: "absolute",
-                          left: 13,
-                          bottom: 12,
+                          position:"absolute",
+                          left:13,
+                          bottom:12,
                           color: "gray",
-                          fontSize: 12,
+                          fontSize:12,                          
                           // justifyContent: "flex-start",
                           // alignSelf: "flex-start",
                           // backgroundColor:"red"
@@ -1081,7 +1081,7 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
                       </Text>
                     )}
                     renderPickerItem={(item) => {
-                      const text = getFundsDestinationText(item)
+                      const text = getFundsDestinationText(item);
                       return (
                         <Text
                           style={{
@@ -1094,10 +1094,10 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
                         >
                           {text}
                         </Text>
-                      )
+                      );
                     }}
                     renderSelectedItem={(item) => {
-                      const text = getFundsDestinationText(item)
+                      const text = getFundsDestinationText(item);
                       return (
                         <>
                           <Text
@@ -1113,7 +1113,7 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
                             {text}
                           </Text>
                         </>
-                      )
+                      );
                     }}
                   />
                 </View>
@@ -1187,35 +1187,35 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
               isChallenge={isChallenge}
               targetManager={model}
               lockMetric={!isNew}
-            // valueMetric={valueMetric}
-
+              // valueMetric={valueMetric}
+              
             />
           </View>
           <View style={styles.startContainer}>
             <TouchableOpacity
               onPress={() =>
                 doAsync(async () => {
-                  const isValid = model.validate() // sets isInvalid flag
+                  const isValid = model.validate(); // sets isInvalid flag
                   if (isValid) {
-                    try {
-                      let message: string
-                      if (isNew) {
-                        message = await App.goalsAndChallenges.create(model)
-
-                      }
-                      else message = await App.goalsAndChallenges.update(model)
-                      ToastAndroid.show(message, ToastAndroid.SHORT)
-                      p.navigation.pop()
-                      // } else if (!model.hasValidTarget) {
-                      //   const message = isChallenge
-                      //     ? "Please select at least one metric for challenge"
-                      //     : "Please select one metric for goal"
-                      //   Alert.alert("", message)
-                      // }
-                    } catch (e) {
-
+                  try {
+                    let message: string;
+                    if (isNew){
+                      message = await App.goalsAndChallenges.create(model);
+                     
                     }
+                    else message = await App.goalsAndChallenges.update(model);
+                    ToastAndroid.show(message, ToastAndroid.SHORT);
+                    p.navigation.pop();
+                    // } else if (!model.hasValidTarget) {
+                    //   const message = isChallenge
+                    //     ? "Please select at least one metric for challenge"
+                    //     : "Please select one metric for goal"
+                    //   Alert.alert("", message)
+                    // }
+                  } catch (e) {
+                   
                   }
+                }
                 })
               }
               style={styles.donetext1}
@@ -1237,16 +1237,11 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
             </TouchableOpacity>
           </View>
         </ScrollView>
-
-
-        {/* ----MatricModelOpen onClick => Matric---- */}
-
-
         <Modal
           // animationType="slide"
           transparent={true}
           visible={App.user.metricDrawer}
-          onRequestClose={() => { }}
+          onRequestClose={() => {}}
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
@@ -1255,10 +1250,10 @@ export function EditGoalChallenge(p: StackScreenProps<RootStackPropsPerPath, 'Ed
           </View>
         </Modal>
       </SafeAreaView>
-    )
-  })
+    );
+  });
 }
-const windowWidth = Dimensions.get("window").width
+const windowWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   screen: {
@@ -1280,7 +1275,7 @@ const styles = StyleSheet.create({
   inputDate: {
     width: "92%",
     display: "flex",
-  },
+     },
   input: {
     // marginBottom: 5,
     display: "flex",
@@ -1463,8 +1458,8 @@ const styles = StyleSheet.create({
     width: "80%",
     marginLeft: 20,
     borderRadius: 35,
-    overflow: 'hidden',
-
+    overflow:'hidden',
+    
   },
   centeredView: {
     flex: 1,
@@ -1489,8 +1484,8 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  shadbox: {
-    marginTop: 11,
-    marginBottom: 13,
+  shadbox:{
+    marginTop:11,
+    marginBottom:13,
   }
-})
+});

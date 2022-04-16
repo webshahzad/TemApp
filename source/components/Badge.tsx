@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderRadius: 5,
   },
-
+  
   badgeContent: {
     // flex: 1,
     paddingVertical: 5,

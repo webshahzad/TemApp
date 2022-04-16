@@ -3,9 +3,9 @@
 // Proprietary and Confidential. All rights reserved. //
 //----------------------------------------------------//
 
-import React, { useEffect, useState } from "react";
-import { StackScreenProps } from "@react-navigation/stack";
-import { reactive } from "common/reactive";
+import React, { useEffect, useState } from "react"
+import { StackScreenProps } from "@react-navigation/stack"
+import { reactive } from "common/reactive"
 import {
   ScrollView,
   StyleSheet,
@@ -17,14 +17,14 @@ import {
   TouchableOpacity,
   Alert,
   Dimensions,
-} from "react-native";
-import { Ref, Transaction } from "reactronic";
-import { Neomorph } from "react-native-neomorph-shadows";
+} from "react-native"
+import { Ref, Transaction } from "reactronic"
+import { Neomorph } from "react-native-neomorph-shadows"
 import {
   EventEditor,
   EventRecurrenceNameMap,
-} from "models/app/Calendar/EventEditor";
-import { RootStackPropsPerPath } from "navigation/params";
+} from "models/app/Calendar/EventEditor"
+import { RootStackPropsPerPath } from "navigation/params"
 import {
   AllEventTypesToCreate,
   AllEventVisibility,
@@ -33,46 +33,46 @@ import {
   getEventTypeText,
   getEventVisibilityText,
   InfiniteEvent,
-} from "models/data/EventInfo";
-import { App } from "models/app/App";
-import { DatePicker } from "components/DatePicker";
+} from "models/data/EventInfo"
+import { App } from "models/app/App"
+import { DatePicker } from "components/DatePicker"
 
-import { PickerBadge } from "components/PickerBadge";
-import { doAsync } from "common/doAsync";
-import { DangerColor, MainBlueColor } from "components/Theme";
-import { EventScope } from "models/app/Calendar/EventDetailsModel";
-import { PickerManager } from "models/app/PickerManager";
-import { addEvent, eventList, loadAndShowEventDetails } from "./Events";
-import arrow from "assets/images/arrow.png";
-import Icon from "react-native-vector-icons/Ionicons";
-import CheckBoxComp from "components/CheckBoxComp";
-import CircularProgress from "components/CircularProgress";
-import { InputBadgeDark } from "components/InputBadgeDark";
-import { useNavigation } from "@react-navigation/native";
+import { PickerBadge } from "components/PickerBadge"
+import { doAsync } from "common/doAsync"
+import { DangerColor, MainBlueColor } from "components/Theme"
+import { EventScope } from "models/app/Calendar/EventDetailsModel"
+import { PickerManager } from "models/app/PickerManager"
+import { addEvent, eventList, loadAndShowEventDetails } from "./Events"
+import arrow from "assets/images/arrow.png"
+import Icon from "react-native-vector-icons/Ionicons"
+import CheckBoxComp from "components/CheckBoxComp"
+import CircularProgress from "components/CircularProgress"
+import { InputBadgeDark } from "components/InputBadgeDark"
+import { useNavigation } from "@react-navigation/native"
 
 export interface EditEventProps {
-  editor: EventEditor;
+  editor: EventEditor
 }
 
 export function EditEvent(
   p: StackScreenProps<RootStackPropsPerPath, "EditEvent">
 ): JSX.Element {
   useEffect(() => {
-    const editor = p.route.params.editor;
+    const editor = p.route.params.editor
     p.navigation.setOptions({
       title: editor.isUpdating ? "Edit Event" : "Create Event",
-    });
-  }, [p.navigation]);
+    })
+  }, [p.navigation])
 
   const saveChanges = async (scope: EventScope): Promise<void> => {
-    await editor.saveChanges(scope);
+    await editor.saveChanges(scope)
     ToastAndroid.show(
       editor.isUpdating ? "Event updated" : "Event created",
       ToastAndroid.SHORT
-    );
-    if (editor.isUpdating) Alert.alert("2"), App.rootNavigation.pop();
-    else void loadAndShowEventDetails(editor.event._id!, true);
-  };
+    )
+    if (editor.isUpdating) Alert.alert("2"), App.rootNavigation.pop()
+    else void loadAndShowEventDetails(editor.event._id!, true)
+  }
 
   const saveActions = [
     {
@@ -83,7 +83,7 @@ export function EditEvent(
       name: "Update for this and following events",
       onPress: () => doAsync(() => saveChanges(EventScope.AllFutureEvents)),
     },
-  ];
+  ]
 
   const endsOnActions = [
     {
@@ -94,67 +94,68 @@ export function EditEvent(
       name: "Select End Date",
       onPress: () => p.route.params.editor.selectEndsOnDate(),
     },
-  ];
+  ]
 
-  const editor = p.route.params.editor;
- 
-  const editorRef = Ref.to(editor);
- 
-  const e = Ref.to(editor.event);
-  const u = Ref.to(App.user);
+  const editor = p.route.params.editor
+
+  const editorRef = Ref.to(editor)
+
+  const e = Ref.to(editor.event)
+  const u = Ref.to(App.user)
 
   const [visibilityManager] = useState(() =>
     Transaction.run(() => new PickerManager(AllEventVisibility, e.visibility))
-  );
+  )
   const [typeManager] = useState(() =>
     Transaction.run(() => new PickerManager(AllEventTypesToCreate, e.eventType))
-  );
-  const navigation = useNavigation();
+  )
+  const navigation = useNavigation()
 
 
 
-   
+
   return reactive(() => {
-    const startDateEditor = editor.startDateEditor;
-    const endDateEditor = editor.endDateEditor;
-    const manager = App.addTemates;
-   
+    const startDateEditor = editor.startDateEditor
+    const endDateEditor = editor.endDateEditor
+    const manager = App.addTemates
+
     const tematesToAdd = manager.tematesToAdd
-      const endsOn = new Date(
+    const endsOn = new Date(
       e.endsOn.value === InfiniteEvent ? editor.end : e.endsOn.value
-    );
-    const updating = editor.isUpdating;
+    )
+    const updating = editor.isUpdating
 
     // Validation
-    const showInvalidTitle = editor.isInvalid && !editor.hasValidTitle;
+    const showInvalidTitle = editor.isInvalid && !editor.hasValidTitle
     const showInvalidDescription =
-      editor.isInvalid && !editor.hasValidDescription;
-    const showInvalidEnd = !editor.isInvalid && editor.hasValidEnd;
+      editor.isInvalid && !editor.hasValidDescription
+    const showInvalidEnd = !editor.isInvalid && editor.hasValidEnd
     const showInvalidCapacity =
       editor.isInvalid &&
-      (!editor.hasValidCapacity || !editor.canAccommodateAllMembers);
-    const invalidCapacityText = editor.getInvalidCapacityText();
+      (!editor.hasValidCapacity || !editor.canAccommodateAllMembers)
+    const invalidCapacityText = editor.getInvalidCapacityText()
     const temateTitle =
-      editorRef.selectedGroup.owner.selectedGroup?.group_title;
+      editorRef.selectedGroup.owner.selectedGroup?.group_title
 
 
-      const temmateTitle =()=>{
-        if(temateTitle){
-          return temateTitle
-        }else if( tematesToAdd[0]?.getFullName()){
-          return tematesToAdd[0]?.getFullName()
-        }else{
-          return "Temates"
-        }
+    const temmateTitle = () => {
+      if (temateTitle) {
+        return temateTitle
+      } else if (tematesToAdd[0]?.getFullName()) {
+        return tematesToAdd[0]?.getFullName()
+      } else {
+        return "Temates"
       }
-      
+    }
+    const windowWidth = Dimensions.get("window").width
+    const windowHeight = Dimensions.get("window").height
     return (
       <View style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.header}>
             <Pressable
               style={styles.back}
-              onPress={() =>{App.rootNavigation.pop(), App.addTemates.reset()}}
+              onPress={() => { App.rootNavigation.pop(), App.addTemates.reset() }}
             >
               <Image source={arrow} />
             </Pressable>
@@ -162,7 +163,7 @@ export function EditEvent(
             <TouchableOpacity
               style={styles.action}
               // onPress={()=>openEditEvent()}
-              onPress={() => {navigation.navigate("Calendar"), App.addTemates.reset()}}
+              onPress={() => { navigation.navigate("Calendar"), App.addTemates.reset() }}
             >
               <Icon
                 name="close"
@@ -174,11 +175,12 @@ export function EditEvent(
             <Text style={styles.heading}>NEW EVENT</Text>
           </View>
           <View style={styles.lineWithWarning}>
+            <Text style={styles.eventText} >Event Name*</Text>
             <InputBadgeDark
               model={e.title}
-              label="Event Name*"
-              labelColor="#0B82DC"
-              style={{ top: 5,marginBottom:5}}
+              // label="Event Name*"
+              // labelColor="#0B82DC"
+              // style={{ top: 5, marginBottom: 5, }}
             />
             <Text
               style={[
@@ -189,7 +191,7 @@ export function EditEvent(
               Please enter title
             </Text>
           </View>
-
+          {/* <Text style={{ color: '#0B82DC', }}>Start</Text> */}
           <DatePicker
             label="Start Date"
             icon="calendar-alt"
@@ -198,9 +200,10 @@ export function EditEvent(
             manager={startDateEditor}
             labelBackgroundColor="white"
             onDateChange={(date: any) => {
-              startDateEditor.setValue(date);
+              startDateEditor.setValue(date)
             }}
-            style={styles.line}
+            style={{marginBottom:30}}
+            // style={styles.line}
             minimumDate={new Date()}
           />
 
@@ -227,24 +230,25 @@ export function EditEvent(
           <Neomorph
             inner // <- enable shadow inside of neomorph
             style={{
-              marginTop: 10,
+              marginTop: 20,
+              marginBottom: 20,
               shadowRadius: 1,
               borderRadius: 1,
               shadowColor: "#fff",
               shadowOffset: { width: 4, height: 4 },
               elevation: 2,
               backgroundColor: "",
-              width: 410,
-              height: 10,
+              width: (windowWidth / 100) * 100,
+              height: (windowHeight / 100) * 1,
             }}
           />
           <View>
-            <Text style={{ color: "#0B82DC", marginLeft: 33, marginTop: 8 }}>
+            <Text style={{ color: "#0B82DC", marginLeft: 35, marginTop: 8 }}>
               Event Details
             </Text>
           </View>
-          <View style={{ justifyContent: "center",alignItems: "center"}}>
-            <View style={[styles.inputContainer,{marginBottom:-10}]}>
+          <View style={{ justifyContent: "center", alignItems: "center" }}>
+            <View style={[styles.inputContainer, { marginBottom: -10 }]}>
               <Text style={styles.boxText}>Description</Text>
               <CheckBoxComp
                 model={u.showDesc}
@@ -256,7 +260,7 @@ export function EditEvent(
             {u.showDesc.value && (
               <InputBadgeDark
                 model={e.description}
-                style={[{ width: "97%" },{marginTop:20}]}
+                style={[{ width: "97%" }, { marginTop: 20 }]}
                 placeholder="description"
               />
             )}
@@ -265,7 +269,7 @@ export function EditEvent(
             style={[
               styles.validationMessage,
               { color: showInvalidDescription ? DangerColor : "transparent" },
-            ,{marginTop:10}]}
+              , { marginTop: 10 }]}
           >
             Please enter description
           </Text>
@@ -282,7 +286,7 @@ export function EditEvent(
                 onPress={() => {
                   App.rootNavigation.push("SearchUserLocation", {
                     manager: editor.location,
-                  });
+                  })
                 }}
                 model={editorRef.isLocation}
                 background="#3e3e3e"
@@ -373,7 +377,7 @@ export function EditEvent(
                     >
                       {getEventTypeText(item)}
                     </Text>
-                  );
+                  )
                 }}
               />
             )}
@@ -386,7 +390,7 @@ export function EditEvent(
                   tematesToAddRef: editorRef.members,
                   selectedTemRef: editorRef.selectedGroup,
                   doNotMixTemAndTemates: true,
-                });
+                })
               })
             }
           >
@@ -440,7 +444,7 @@ export function EditEvent(
                     >
                       {getEventVisibilityText(item)}
                     </Text>
-                  );
+                  )
                 }}
               />
             )}
@@ -463,29 +467,29 @@ export function EditEvent(
             // }}
             onPress={() =>
               doAsync(async () => {
-                const isValid = editor.validate(); // sets isInvalid flag
+                const isValid = editor.validate() // sets isInvalid flag
                 try {
                   if (isValid) {
                     if (
                       updating &&
                       editor.event.reccurEvent !== EventRecurrence.Single
                     ) {
-                      App.actionModal.show(saveActions);
+                      App.actionModal.show(saveActions)
                     } else {
-                      await addEvent(e);
+                      await addEvent(e)
                       //  saveChanges(EventScope.AllFutureEvents);
                     }
                     {
-                      navigation.goBack();
+                      navigation.goBack()
                     }
                   } else {
                     ToastAndroid.show(
                       "Please check event details",
                       ToastAndroid.SHORT
-                    );
+                    )
                   }
                 } catch (e) {
-                  ToastAndroid.show(e.message, ToastAndroid.SHORT);
+                  ToastAndroid.show(e.message, ToastAndroid.SHORT)
                 }
               })
             }
@@ -504,19 +508,25 @@ export function EditEvent(
           </TouchableOpacity>
         </ScrollView>
       </View>
-    );
-  });
+    )
+  })
 }
 
-const Margin = 20;
-const windowWidth = Dimensions.get("window").width;
+const Margin = 20
+const windowWidth = Dimensions.get("window").width
 const styles = StyleSheet.create({
   container: {
     padding: 10,
     backgroundColor: "#2e2e2e",
     flex: 1,
   },
-  lineWithWarning: {},
+  eventText: {
+    color: '#0B82DC',
+    marginLeft: 35
+  },
+  lineWithWarning: {
+    paddingTop:10
+  },
   validationMessage: {
     color: DangerColor,
     fontSize: 12,
@@ -598,7 +608,7 @@ const styles = StyleSheet.create({
   heading: {
     color: "#0B82DC",
     fontSize: 15,
-    margin: 25,
+    margin: 30,
     fontWeight: "600",
   },
   inputContainer: {
@@ -623,7 +633,7 @@ const styles = StyleSheet.create({
   boxText: {
     color: "#fff",
     marginLeft: 10,
-    width:(windowWidth/100)*65,
+    width: (windowWidth / 100) * 65,
 
   },
   journal: {
@@ -665,4 +675,4 @@ const styles = StyleSheet.create({
     shadowRadius: 16.0,
     elevation: 2,
   },
-});
+})

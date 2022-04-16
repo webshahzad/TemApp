@@ -61,6 +61,7 @@ export function MyHealth(): JSX.Element {
             styles={{ justifyContent: "center", alignItems: "center" }}
           ></CircularProgress>
         </TouchableOpacity>
+        
            <DialougeBoxComp onPress={()=>Transaction.run(() => (App.user.isJournal = false))}/>
       </>
     );
