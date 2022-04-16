@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "F:\\Shahzad\\office\\Tem_backUp-08-04-22\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
+            "outputFile": "E:\\CompanyProject\\azar\\TemApp\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Micro_Soft\\.gradle\\caches\\transforms-2\\files-2.1\\330bc205c74d549cb31e45b23b25d45f\\appcompat-1.2.0\\res\\values-port\\values-port.xml",
+                    "source": "C:\\Users\\HP\\.gradle\\caches\\transforms-2\\files-2.1\\330bc205c74d549cb31e45b23b25d45f\\appcompat-1.2.0\\res\\values-port\\values-port.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
