@@ -122,7 +122,6 @@ export class GoalChallengeDetailsModel
   // TargetMetricsManager
   targetMetric?: Metrics = undefined;
   targetValue?: number = undefined;
-  totalActivites: ReactNode
   
 
   constructor(gncType: ActivityType) {

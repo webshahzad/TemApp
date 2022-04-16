@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { Dimensions, View } from "react-native";
 import { Path, Defs, LinearGradient, Stop } from "react-native-svg";
 import { DashedProgress } from "react-native-dashed-progress";
 
@@ -16,10 +16,10 @@ const CircularProgress = (p: circularProps) => {
   return (
     <View
       style={{
-        padding: 10,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        overflow: 'hidden',
+        // padding: 10,
+        // display: "flex",
+
       }}
     >
       <DashedProgress
@@ -38,15 +38,15 @@ const CircularProgress = (p: circularProps) => {
         duration={3000}
         showIndicator={false}
       />
-      {p.children}
+      {/* {p.children}
       <Defs>
-        <LinearGradient id="grad" x1="0" y1="0" x2="1" y2="0">
-          <Stop offset="0" stopColor="#32C5FF" stopOpacity="10" />
-          <Stop offset="0" stopColor="#B620E0" stopOpacity="1" />
-          <Stop offset="1" stopColor="#F7B500" stopOpacity="10" />
+        <LinearGradient id='grad' x1='0' y1='0' x2='1' y2='0'>
+          <Stop offset='0' stopColor='#32C5FF' stopOpacity='10' />
+          <Stop offset='0' stopColor='#B620E0' stopOpacity='1' />
+          <Stop offset='1' stopColor='#F7B500' stopOpacity='10' />
         </LinearGradient>
       </Defs>
-      <Path fill="url(#grad)" stroke="url(#grad)" />
+      <Path fill='url(#grad)' stroke='url(#grad)' /> */}
     </View>
   );
 };

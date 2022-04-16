@@ -92,19 +92,8 @@ export const NewPost = (p: StackScreenProps<RootStackPropsPerPath, 'NewPost'>): 
               </View>
             </Neomorph>
           </View>
-          {/* <View style={styles.mainbutton}>
+          <View style={styles.mainbutton}>
             <TouchableOpacity onPress={()=> p.navigation.push('TagPeople')} 
-            style={styles.tagpeople}>
-              <Text style={styles.text}>Tag People</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={()=> p.navigation.push('SearchLocation')}  
-              style={styles.addlocation}>
-              <Text style={styles.text}>Add Location</Text>
-            </TouchableOpacity>
-          </View> */}
-
-          <View style={{flexDirection:"row",justifyContent:'space-around'}}>
-          <TouchableOpacity onPress={()=> p.navigation.push('TagPeople')} 
             style={styles.tagpeople}>
               <Text style={styles.text}>Tag People</Text>
             </TouchableOpacity>
@@ -214,7 +203,6 @@ const styles = StyleSheet.create({
   mainbutton: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent:"space-between",
 },
 
 tagpeople: {
@@ -240,6 +228,7 @@ tagpeople: {
 addlocation: {
     backgroundColor: '#F7F7F7',
     marginHorizontal: 50,
+    margin: 3,
     width: 100,
     height: 50,
     justifyContent: 'center',

@@ -49,6 +49,7 @@ export function Dashboard(
     setScreenNAme(screen)
     setChangeText(label);
     setIndexNumber(index)
+
   };
   return (
     <HomeContainer slider hexagonText={changeText} screenName={screenNAme} indexNumber={indexNumber} >

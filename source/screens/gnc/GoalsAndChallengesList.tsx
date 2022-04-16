@@ -90,7 +90,7 @@ export const GoalsAndChallengesList = (
               justifyContent: "center",
               alignItems: "center",
               width: (windowWidth / 100) * 90,
-              height: (windowWidth / 100) * 100,
+              // height: (windowWidth / 100) * 100,
             }}
           >
             <Text style={styles.noItemsText}>{p.listEmptyText}</Text>
@@ -110,7 +110,7 @@ export const GoalsAndChallengesList = (
               elevation: 7,
               backgroundColor: "#f7f7f7",
               width: (windowWidth / 100) * 80,
-              height: (windowHeight / 100) * 95,
+              // height: (windowHeight / 100) * 95,
              }}>
             <FlatList
               ref={listViewRef}
@@ -168,6 +168,7 @@ export const GoalsAndChallengesList = (
                 width: (windowWidth / 100) * 75,
                 backgroundColor: "transparent",
               }}
+              nestedScrollEnabled
               data={list.items}
               showsVerticalScrollIndicator={false}
               renderItem={({ item }) => (

@@ -64,7 +64,7 @@ export function ChallengeDetails(
   p: StackScreenProps<RootStackPropsPerPath, "ChallengeDetails">
 ): JSX.Element | null {
   const model = App.goalsAndChallenges.currentGoalChallenge;
-  // console.log("challengeModel--->>>>", JSON.stringify(model,null,2))
+  console.log("challengeModel", model)
   if (!model) return null;
 
   React.useEffect(() => {
@@ -301,8 +301,8 @@ function ChallengeProgress(): JSX.Element | null {
           >
             <View style={styles.detailTab}>
               <Text style={styles.tabText}>
-                FUNDRAISING |  ${model?.fundraising?.collectedAmount} of ${model?.fundraising?.goalAmount} 
-                {/* FUNDRAISING | {collected} Of {targetValue} */}
+                {/* FUNDRAISING | $65.00 of $250  */}
+                FUNDRAISING |  ${model?.fundraising?.collectedAmount} of ${model?.fundraising?.goalAmount}
                
               </Text>
             </View>
@@ -419,6 +419,7 @@ function ChallengeProgress(): JSX.Element | null {
                           metric={metric}
                           showScoreHex
                         />
+                        
                       ))}
                     {model.needToLoadMoreMemberScore() && (
                       <Pressable
