@@ -102,8 +102,8 @@ export const Theme = StyleSheet.create({
 
   shadowText: {
     textAlign: "center",
-    color: "#FFF",
-    textShadowColor: "rgba(0,0,0,0.5)",
+    color: "#0E69AF",
+    textShadowColor: "#000000",
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 10,
     shadowColor: "#000000",

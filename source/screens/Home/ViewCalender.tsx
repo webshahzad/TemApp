@@ -1,199 +1,167 @@
-import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity,Dimensions } from "react-native";
-import active from "assets/images/active.png";
-import active2 from "assets/images/active2.png";
-import { standalone, Transaction } from "reactronic";
-import { CalendarManager } from "models/app/Calendar/CalendarManager";
-import { App } from "models/app/App";
-import { EventEditor } from "models/app/Calendar/EventEditor";
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import React from 'react'
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native'
+import active from 'assets/images/active.png'
+import active2 from 'assets/images/active2.png'
+import { standalone, Transaction } from 'reactronic'
+import { CalendarManager } from 'models/app/Calendar/CalendarManager'
+import { App } from 'models/app/App'
+import { EventEditor } from 'models/app/Calendar/EventEditor'
+import {
+  moderateScale,
+  moderateVerticalScale,
+  scale,
+} from 'react-native-size-matters'
 
 export interface EditEventProps {
   editor: EventEditor;
 }
-export function ViewCalender(): JSX.Element {
-  const d = new Date();
-  let day = d.getDay();
-  const windowWidth = Dimensions.get("window").width;
-  return (
-    <View style={styles.mainContainer}>
-      <View style={styles.container1}>
-        <View
-          style={{
-            marginTop: 5,
-            display: "flex",
-            flexDirection: "row",            
-            }} >
-         <View>
-         <Image 
-          style={{position:'absolute',right:50}}
-          source={day == 0 ? active : active2} />
-         </View>
-          <View>
-            <Image
-              style={{position:'absolute',right:29}}
-              source={day == 1 ? active : active2}
-            />
-          </View>
-          <View>
-            <Image
-              style={{position:'absolute',right:8}}
-              source={day == 2 ? active : active2}
-            />
-          </View>
-          <View>
-            <Image
-              style={{ }}
-              source={day == 3 ? active : active2}
-            />
-          </View>
-          <View>
-            <Image style={{ position:'absolute',right:-22}} source={day == 4 ? active : active2} />
-          </View>
-          <View>
-            <Image style={{position:'absolute',left:30}} source={day == 5 ? active : active2} />
-          </View>
-          <View>
-            <Image 
-            style={{position:'absolute',left:50}} 
-            source={day == 6 ? active : active2} />
-          </View>
-        </View>
-        <View style={styles.hr1}>
-          <View style={styles.hr2}>
-            <View style={styles.hr3} />
-            <View style={styles.hr4} />
-          </View>
-          <View style={{justifyContent:'center',alignItems:'center' }}>
-            <Text style={styles.weekname}>SMTWTFS</Text>
-          </View>
-        </View>
-      </View>
-      <View style={styles.container2}>
-        <TouchableOpacity
-          onPress={() => {
-            const manager = standalone(() =>
-              Transaction.run(() => new CalendarManager())
-            );
 
-            App.rootNavigation.push("Calendar", { manager });
-          }}
+const WEEK: string[] = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+
+function Divider() {
+  return <View style={styles.divider} />
+}
+
+interface IWeekProps {
+  isIndicator?: boolean | undefined;
+}
+
+function Week(props: IWeekProps) {
+  const { isIndicator } = props
+  const d = new Date()
+  const day = d.getDay()
+
+  const renderWeek = (weekArr: string[]) => {
+    return weekArr.map((item: string, index: number) => {
+      return (
+        <View
+          key={item + Math.floor(Math.random())}
+          style={styles.renderWeekContainer}
         >
-          <Text style={styles.viewCalender}>View Your Calender</Text>
-        </TouchableOpacity>
+          {isIndicator ? (
+            <Image
+              style={styles.weekDotImg}
+              source={day == index ? active : active2}
+            />
+          ) : (
+            <Text style={styles.weekTxt}>{item}</Text>
+          )}
+        </View>
+      )
+    })
+  }
+
+  return <View style={styles.weekContainer}>{renderWeek(WEEK)}</View>
+}
+
+export function ViewCalender(): JSX.Element {
+  const d = new Date()
+  const day = d.getDay()
+  const windowWidth = Dimensions.get('window').width
+  return (
+    <View style={[styles.container, styles.shadow]}>
+      <View style={[styles.innerContainer, styles.lightShadow]}>
+        <Week isIndicator />
+        <Divider />
+        <Week />
+      </View>
+      <View style={styles.viewCalendarContainer}>
+        <Text style={styles.viewCalenderText}>View your Calendar</Text>
       </View>
     </View>
-  );
+  )
 }
-const windowWidth = Dimensions.get("window").width;
+
 const styles = StyleSheet.create({
-  mainContainer: {
-    marginTop:8,    
-    backgroundColor: "#0682DC",
-    zIndex: 1,
-    width: (windowWidth/100)* 70,
-    marginBottom: 175,
-    justifyContent: "center",
-    alignItems: "center",
-    borderColor: "#0B82DC",
-    borderRadius: 8,
-    borderTopWidth: 4,
-    borderRightWidth: 4,
-    borderLeftWidth: 4,
-    borderBottomWidth: 4,
-    shadowColor: "#fff",
+  container: {
+    marginTop: scale(10),
+    width: moderateScale(278),
+    height: moderateScale(111),
+    backgroundColor: '#0682DC',
+
+    borderRadius: scale(8),
+
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingTop: moderateVerticalScale(10),
+    paddingBottom: moderateVerticalScale(7),
+  },
+  innerContainer: {
+    width: moderateScale(258),
+    height: moderateScale(70),
+    backgroundColor: '#3E3E3E',
+    borderWidth: scale(8),
+    borderColor: '#0B82DC',
+    borderRadius: scale(8),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  viewCalendarContainer: {
+    width: moderateScale(208),
+    height: moderateScale(19),
+    borderRadius: scale(8),
+    backgroundColor: '#0682DC',
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 7,
+      height: 1,
     },
-    shadowOpacity: 0.49,
-    shadowRadius: 7.11,
-    elevation: 11,
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 3,
+
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  container1: {
-    marginTop:5,
-    display: "flex",
-    flexDirection: "column",
-    width: (windowWidth/100)* 60,
-    // height: 75,
-    backgroundColor: "#3e3e3e",
-    justifyContent: "center",
-    alignItems: "center",
-    borderColor: "#0B82DC",
-    borderRadius: 12,
-    borderTopWidth: 8,
-    borderRightWidth: 8,
-    borderLeftWidth: 8,
-    borderBottomWidth: 8,
-    shadowColor: "#fff",
+  viewCalenderText: {
+    fontSize: scale(8),
+    fontWeight: '500',
+    color: '#FFFFFF',
+    opacity: 0.7,
+  },
+  shadow: {
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 6,
+      height: 9,
     },
-    shadowOpacity: 0.37,
-    shadowRadius: 7.49,
-    elevation: 9,
+    shadowOpacity: 0.48,
+    shadowRadius: 11.95,
+
+    elevation: 18,
   },
-  container2: {
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 10,
-    backgroundColor: "#0B82DC",
-    borderColor: "#0B82DC",
-    borderRadius: 10,
-    width: 190,
-    // height:30,
-    paddingVertical:8,
-    shadowColor: "#fff",
+  lightShadow: {
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 7,
+      height: 1,
     },
-    shadowOpacity: 0.41,
-    shadowRadius: 9.11,
-    elevation: 5,
-    marginBottom:5,
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 3,
   },
-  viewCalender: {
-    fontSize: 16,
-    color: "#fff",
-    fontWeight: "500",
-    textShadowColor: "rgba(0,0,0,0.5)",
-    textShadowOffset: { width: -1, height: -1 },
-    textShadowRadius: 10,
-    shadowColor: "#fff",
+  divider: { width: '90%', height: 0.6, backgroundColor: '#ccc' },
+  weekDotImg: { width: 13, height: 13, resizeMode: 'contain', marginBottom: moderateVerticalScale(3) },
+  renderWeekContainer: {
+    width: 14,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  weekname: {
-    color: "#0B82DC",
-    letterSpacing: 14,
-    marginTop: 5,
-    marginBottom: 5,
-    // borderRadius: 20,
-    textShadowColor: "rgba(0,0,0,0.5)",
-    textShadowOffset: { width: -1, height: -1 },
-    textShadowRadius: 10,
-    shadowColor: "#fff",
-    fontSize:12,
+  weekTxt: { color: '#0B82DC', fontSize: scale(10) },
+  weekContainer: {
+    width: '90%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    margin: 2,
   },
-  hr1: {
-    width: (windowWidth/100)* 45,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  hr2: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 8,
-  },
-  hr3: {
-    flex: 1,
-    height: 1,
-    backgroundColor: "#fff",
-    // marginLeft: 14,
-  },
-  hr4: {
-    flex: 1,
-    height: 1,
-    backgroundColor: "#fff",
-    // marginRight: 14,
-  },
-});
+})

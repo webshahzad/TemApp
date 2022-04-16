@@ -1,9 +1,31 @@
-import React from "react"
-import { View, StyleSheet, Image, ActivityIndicator, Pressable, TouchableHighlight } from "react-native"
-import Swiper from "react-native-swiper"
-import onToggle from "assets/images/ontoggle.png"
-import offToggle from "assets/images/offtoggle.png"
-import { reactive } from "common/reactive"
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import React from 'react'
+import {
+  View,
+  StyleSheet,
+  Image,
+  ActivityIndicator,
+  Pressable,
+  TouchableHighlight,
+  ImageSourcePropType,
+} from 'react-native'
+import Swiper from 'react-native-swiper'
+import onToggle from 'assets/images/ontoggle.png'
+import offToggle from 'assets/images/offtoggle.png'
+import { reactive } from 'common/reactive'
+import { moderateScale } from 'react-native-size-matters'
+
+interface IsIndicatorProps {
+  img: ImageSourcePropType;
+}
+
+const Indicator = (props: IsIndicatorProps) => {
+  return (
+    <View>
+      <Image style={styles.indicatorImg} source={props.img} />
+    </View>
+  )
+}
 
 const SwiperComp = (props: any) => {
   const [indexValue, setIndexValue] = React.useState()
@@ -11,58 +33,43 @@ const SwiperComp = (props: any) => {
   return reactive(() => {
     const RenderDot = ({ active }: any) => {
       if (active) {
-        return (
-          <View style={{ marginTop: 100 }}>
-            <Image
-              style={{ width: 20, height: 20, borderRadius: 10, margin: 3 }}
-              source={onToggle}
-            />
-          </View>
-        )
+        return <Indicator img={onToggle} />
       }
-      return (
-        <Pressable style={{ marginTop: 100 }}>
-          <Image
-            style={{ width: 20, height: 20, borderRadius: 10, margin: 3 }}
-            source={offToggle}
-          />
-        </Pressable>
-      )
+      return <Indicator img={offToggle} />
     }
+
     const handleIndex = (index: any) => {
-      var label = ""
-      var screen = ""
-      var indexNumber = ""
+      var label = ''
+      var screen = ''
+      var indexNumber = ''
       if (index === 0) {
         setIndexValue(index)
-        screen = "SelectActivity"
-        label = "ADD/TRACK ACTIVITY"
+        screen = 'SelectActivity'
+        label = 'ADD/TRACK ACTIVITY'
       } else if (index === 1) {
         setIndexValue(index)
-        screen = "Calendar"
-        label = "ADD EVENT"
-        indexNumber = "1"
+        screen = 'Calendar'
+        label = 'ADD EVENT'
+        indexNumber = '1'
       } else if (index === 2) {
         setIndexValue(index)
-        screen = "GoalsAndChallenges"
-        label = "GOALS & CHALLENGES"
+        screen = 'GoalsAndChallenges'
+        label = 'GOALS & CHALLENGES'
       } else if (index === 3) {
         setIndexValue(index)
-        screen = "ChatList"
-        label = "MESSAGES & TĒMS"
+        screen = 'ChatList'
+        label = 'MESSAGES & TĒMS'
       }
 
       props.onChangeLabel(label, screen, indexNumber)
     }
     return (
-      <TouchableHighlight style={{ height: 340 }}>
+      <View style={styles.container}>
         <Swiper
-          style={{}}
-          height={200}
           loadMinimalSize={1}
-          loadMinimalLoader={<ActivityIndicator color="#04FCF6" size={40} />}
-          loadMinimal={true}
-          onIndexChanged={(index) => {
+          loadMinimalLoader={<ActivityIndicator color='#04FCF6' size={40} />}
+          loadMinimal
+          onIndexChanged={index => {
             handleIndex(index)
           }}
           dot={<RenderDot />}
@@ -70,7 +77,7 @@ const SwiperComp = (props: any) => {
         >
           {props.children}
         </Swiper>
-      </TouchableHighlight>
+      </View>
     )
   })
 }
@@ -78,30 +85,11 @@ const SwiperComp = (props: any) => {
 export default SwiperComp
 
 const styles = StyleSheet.create({
-  active: {
-    backgroundColor: "#000000",
-    shadowColor: "#000000",
-    width: 18,
-    height: 18,
-    borderRadius: 9,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  activeInner: {
-    backgroundColor: "#04FCF6",
-    width: 12,
-    height: 12,
-    borderRadius: 6,
-  },
-  inActive: {
-    backgroundColor: "#000000",
-    width: 18,
-    height: 18,
-    borderRadius: 9,
-    borderColor: "#333",
-    marginLeft: 3,
-    marginRight: 3,
-    marginTop: 3,
-    marginBottom: 3,
+  container: { height: moderateScale(340) },
+  indicatorImg: {
+    width: moderateScale(20),
+    height: moderateScale(20),
+    marginHorizontal: moderateScale(3),
+    resizeMode: 'contain',
   },
 })

@@ -1,16 +1,18 @@
-import React from "react";
-import { Dimensions, View } from "react-native";
-import { Path, Defs, LinearGradient, Stop } from "react-native-svg";
-import { DashedProgress } from "react-native-dashed-progress";
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import React from 'react'
+import { Dimensions, View } from 'react-native'
+import { Path, Defs, LinearGradient, Stop } from 'react-native-svg'
+import { DashedProgress } from 'react-native-dashed-progress'
 
 export interface circularProps {
-  children: any;
-  styles: object | boolean;
+  children?: any;
+  styles?: object | boolean;
   strokeColor: string;
   barWidth: number;
   fill: number | undefined | string;
   radius: number;
   trailColor: string;
+  strokeThickness?: number | undefined;
 }
 const CircularProgress = (p: circularProps) => {
   return (
@@ -48,7 +50,7 @@ const CircularProgress = (p: circularProps) => {
       </Defs>
       <Path fill='url(#grad)' stroke='url(#grad)' /> */}
     </View>
-  );
-};
+  )
+}
 
-export default CircularProgress;
+export default CircularProgress
